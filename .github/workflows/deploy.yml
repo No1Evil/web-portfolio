@@ -18,7 +18,16 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ~/web-portfolio
+            PROJECT_DIR="$HOME/web-portfolio"
+            
+            if [ ! -d "$PROJECT_DIR" ]; then
+              echo "Project directory not found. Cloning..."
+              git clone git@github.com:${{ github.repository }}.git $PROJECT_DIR
+            fi
+            
+            cd $PROJECT_DIR
+            
+            echo "Updating code to branch ${{ inputs.branch_name }}..."
             git fetch origin
             git checkout ${{ inputs.branch_name }}
             git pull origin ${{ inputs.branch_name }}
@@ -29,5 +38,7 @@ jobs:
               SERVICE="portfolio-test"
             fi
             
+            echo "Deploying $SERVICE..."
             docker compose up -d --build $SERVICE
+            
             docker image prune -f
