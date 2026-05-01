@@ -19,6 +19,7 @@ jobs:
         if: ${{ inputs.project_type == 'angular' }}
         run: |
           npm install
+          npx playwright install --with-deps chromium
           npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Test Java
