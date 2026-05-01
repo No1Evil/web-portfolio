@@ -35,9 +35,9 @@ jobs:
             git pull origin ${{ github.ref_name }}
             
             if [ "${{ github.ref_name }}" == "main" ]; then
-              SERVICE="portfolio-prod"
+              SERVICE="frontend-prod"
             else
-              SERVICE="portfolio-test"
+              SERVICE="frontend-test"
             fi
             
             echo "Deploying $SERVICE..."
