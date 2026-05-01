@@ -1,0 +1,32 @@
+name: Reusable Deploy
+on:
+  workflow_call:
+    inputs:
+      branch_name:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/web-portfolio
+            git fetch origin
+            git checkout ${{ inputs.branch_name }}
+            git pull origin ${{ inputs.branch_name }}
+            
+            if [ "${{ inputs.branch_name }}" == "main" ]; then
+              SERVICE="portfolio-prod"
+            else
+              SERVICE="portfolio-test"
+            fi
+            
+            docker compose up -d --build $SERVICE
+            docker image prune -f
