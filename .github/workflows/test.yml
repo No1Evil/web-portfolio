@@ -20,7 +20,7 @@ jobs:
         run: |
           npm install
           npx playwright install --with-deps chromium
-          npm run test -- --watch=false --browsers=ChromeHeadless
+          npm run test -- --watch=false --browsers=chromium
 
       - name: Test Java
         if: ${{ inputs.project_type == 'java' }}
