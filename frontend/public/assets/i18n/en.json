@@ -1,0 +1,19 @@
+{
+  "ok": "ok",
+  "success": "success",
+  "error": "error",
+  "message": "message",
+
+  "menu.aboutme": "About me",
+  "menu.skills": "Skills",
+  "menu.projects": "Projects",
+  "menu.contact": "Contacts",
+
+  "about.title": "Introduction",
+
+  "skills.title": "Technical stack",
+  "skills.subtitle": "The tools and technologies I use to build server solutions",
+
+  "contacts.title": "Get in touch",
+  "contacts.subtitle": "I am always open to new proposals, interesting projects and professional communication"
+}
