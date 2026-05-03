@@ -1,0 +1,14 @@
+{
+  "menu.aboutme": "Обо мне",
+  "menu.skills": "Навыки",
+  "menu.projects": "Проекты",
+  "menu.contact": "Связь",
+
+  "about.title": "Вступление",
+
+  "skills.title": "Стэк",
+  "skills.subtitle": "Инструменты и технологии, которые я использую",
+
+  "contacts.title": "Связаться",
+  "contacts.subtitle": "Я всегда открыт к комуникации, интересным проектам и профессиональному общению"
+}
