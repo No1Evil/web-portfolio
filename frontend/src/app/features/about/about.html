@@ -1,17 +1,17 @@
-<div class="about-page">
+<div class="page-container">
 
-  <section class="hero-section">
+  <section class="section-header">
     <div class="hero-content">
-      <h1 class="main-title">{{ profileService.profile()?.name }}</h1>
+      <h1 class="title">{{ profileService.profile()?.name }}</h1>
       <h2 class="main-subtitle">{{ profileService.profile()?.subtitle }}</h2>
       <div class="hero-badge">{{ profileService.profile()?.availabilityText }}</div>
     </div>
   </section>
 
   <section class="bio-section">
-    <div class="bio-container">
+    <div class="base-card bio-container">
       <div class="bio-image">
-        <img src="me.png" alt=" {{ profileService.profile()?.name }}">
+        <img src="me.png" alt="{{ profileService.profile()?.name }}">
       </div>
       <div class="bio-text">
         <h3>{{ langService.translate('about.title') }}</h3>
