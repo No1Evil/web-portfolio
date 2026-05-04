@@ -1,14 +1,12 @@
-<div class="skills-page">
-
-  <header class="skills-header">
+<div class="page-container">
+  <header class="section-header">
     <h1 class="title">{{ langService.translate('skills.title') }}</h1>
     <p class="subtitle">{{ langService.translate('skills.subtitle') }}</p>
   </header>
 
-  <div class="skills-grid">
-
+  <div class="standard-grid">
     @for (skill of skillService.skills(); track $index){
-      <div class="skill-card">
+      <div class="base-card skill-card-layout">
         <div class="card-icon">
           <fa-icon [icon]="getIcon(skill.icon)"></fa-icon>
         </div>
@@ -22,7 +20,5 @@
         </div>
       </div>
     }
-
-
   </div>
 </div>
