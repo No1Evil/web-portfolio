@@ -1,0 +1,25 @@
+name: Full Pipeline
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  angular-tests:
+    uses: ./.github/workflows/test.yml
+    with:
+      project_type: 'angular'
+
+  angular-build:
+    needs: angular-tests
+    uses: ./.github/workflows/build.yml
+    with:
+      project_type: 'angular'
+      branch_name: ${{ github.ref_name }}
+
+  angular-deploy:
+    needs: angular-build
+    uses: ./.github/workflows/deploy.yml
+    with:
+      branch_name: ${{ github.ref_name }}
+    secrets: inherit

@@ -1,0 +1,29 @@
+name: Reusable Test
+on:
+  workflow_call:
+    inputs:
+      project_type:
+        required: true
+        type: string
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test Angular
+        if: ${{ inputs.project_type == 'angular' }}
+        run: |
+          npm install
+          npx playwright install --with-deps chromium
+          npm run test -- --watch=false --browsers=chromium
+
+      - name: Test Java
+        if: ${{ inputs.project_type == 'java' }}
+        run: |
+          # Тут будет mvn test или gradle test
+          echo "Running Java tests..."

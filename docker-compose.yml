@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  frontend-prod:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-prod
+    restart: always
+    ports:
+      - "80:80"
+
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend-test
+    restart: always
+    ports:
+      - "8080:80"
