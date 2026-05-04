@@ -8,10 +8,30 @@
 
   <nav class="menu-section">
     <ul>
-      <li><a routerLink="/about"><fa-icon [icon]="faUser"></fa-icon> <span>{{ langService.translate('menu.aboutme') }}</span></a></li>
-      <li><a routerLink="/skills"><fa-icon [icon]="faCode"></fa-icon> <span>{{ langService.translate('menu.skills') }}</span></a></li>
-      <li><a routerLink="/projects"><fa-icon [icon]="faProjectDiagram"></fa-icon> <span>{{ langService.translate('menu.projects') }}</span></a></li>
-      <li><a routerLink="/contact"><fa-icon [icon]="faEnvelope"></fa-icon> <span>{{ langService.translate('menu.contact') }}</span></a></li>
+      <li>
+        <a routerLink="/about" routerLinkActive="active">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <span>{{ langService.translate('menu.aboutme') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/skills" routerLinkActive="active">
+          <fa-icon [icon]="faCode"></fa-icon>
+          <span>{{ langService.translate('menu.skills') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/projects" routerLinkActive="active">
+          <fa-icon [icon]="faProjectDiagram"></fa-icon>
+          <span>{{ langService.translate('menu.projects') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contact" routerLinkActive="active">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+          <span>{{ langService.translate('menu.contact') }}</span>
+        </a>
+      </li>
     </ul>
   </nav>
 
@@ -21,7 +41,7 @@
         <li>
           <button (click)="langService.changeLang(lang)" [class.active]="langService.currentLang() === lang">
             <img [src]="'assets/country/flag-' + lang + '.svg'" [alt]="lang">
-            {{ lang }}
+            <span>{{ lang }}</span>
           </button>
         </li>
       }
