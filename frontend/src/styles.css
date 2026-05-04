@@ -1,1 +1,119 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --main-bg-color: #1b1d26;
+  --content-bg-color: #16171e;
+  --card-bg: #1b1c24;
+  --card-bg-dark: #232627;
+  --card-hover-bg: #2d303e;
+
+  --accent-color: #6c5ce7;
+  --accent-glow: rgba(108, 92, 231, 0.15);
+  --accent-light: #a29bfe;
+
+  --text-main: #ffffff;
+  --text-muted: #a0a0a0;
+  --text-dim: #666666;
+
+  --sidebar-width: 260px;
+  --container-width: 1100px;
+  --radius-lg: 24px;
+  --radius-md: 15px;
+  --radius-sm: 8px;
+
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background-color: var(--main-bg-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.page-container {
+  padding: 40px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  padding: 40px 0 60px;
+}
+
+.section-header .title {
+  font-size: 3rem;
+  margin: 0;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.section-header .subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-top: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.standard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.base-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.base-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.tag {
+  background: var(--card-bg-dark);
+  color: var(--text-muted);
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+  border: 1px solid transparent;
+}
+
+.tag:hover {
+  background: var(--card-hover-bg);
+  color: var(--text-main);
+  border-color: var(--accent-color);
+}
+
+.tag.primary {
+  background: rgba(108, 92, 231, 0.2);
+  color: var(--accent-light);
+  border-color: rgba(108, 92, 231, 0.3);
+}
+
+.tag.primary:hover {
+  background: var(--accent-color);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .standard-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-header .title {
+    font-size: 2.2rem;
+  }
+  .page-container {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,50 @@
+<!--suppress HtmlUnknownTarget -->
+<div class="sidebar" [class.collapsed]="layoutService.isCollapsed()">
+
+  <div class="logo-section">
+    <img src="me.png" alt="logo">
+    <span class="logo-text">Fjodor Tšumakov</span>
+  </div>
+
+  <nav class="menu-section">
+    <ul>
+      <li>
+        <a routerLink="/about" routerLinkActive="active">
+          <fa-icon [icon]="faUser"></fa-icon>
+          <span>{{ langService.translate('menu.aboutme') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/skills" routerLinkActive="active">
+          <fa-icon [icon]="faCode"></fa-icon>
+          <span>{{ langService.translate('menu.skills') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/projects" routerLinkActive="active">
+          <fa-icon [icon]="faProjectDiagram"></fa-icon>
+          <span>{{ langService.translate('menu.projects') }}</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/contact" routerLinkActive="active">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+          <span>{{ langService.translate('menu.contact') }}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="menu-lang">
+    <ul>
+      @for (lang of ['en', 'et', 'ru']; track lang) {
+        <li>
+          <button (click)="langService.changeLang(lang)" [class.active]="langService.currentLang() === lang">
+            <img [src]="'assets/country/flag-' + lang + '.svg'" [alt]="lang">
+            <span>{{ lang }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

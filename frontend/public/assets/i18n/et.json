@@ -1,0 +1,19 @@
+{
+  "ok": "ok",
+  "success": "õnnestus",
+  "error": "viga",
+  "message": "sõnum",
+
+  "menu.aboutme": "Minust",
+  "menu.skills": "Oskused",
+  "menu.projects": "Projektid",
+  "menu.contact": "Kontakt",
+
+  "about.title": "Tutvustus",
+
+  "skills.title": "Tehniline pagas",
+  "skills.subtitle": "Tööriistad ja tehnoloogiad, mida kasutan serverilahenduste loomiseks",
+
+  "contacts.title": "Võta ühendust",
+  "contacts.subtitle": "Olen alati avatud uutele pakkumistele, huvitavatele projektidele ja professionaalsele suhtlusele"
+}
