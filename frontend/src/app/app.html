@@ -1,13 +1,16 @@
 <div class="app-wrapper">
 
-  <button class="menu-trigger" (click)="layoutService.toggleSidebar()">
+  <button class="menu-trigger"
+          [class.shifted]="!layoutService.isCollapsed()"
+          (click)="layoutService.toggleSidebar()">
     <i class="fas" [class.fa-bars]="layoutService.isCollapsed()" [class.fa-times]="!layoutService.isCollapsed()"></i>
   </button>
 
   <app-navbar></app-navbar>
 
   <main class="main-content" [class.expanded]="layoutService.isCollapsed()">
-    <div class="page-container">
+
+    <div class="content-wrapper">
       <router-outlet></router-outlet>
     </div>
 
