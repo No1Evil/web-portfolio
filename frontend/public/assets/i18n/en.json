@@ -15,5 +15,8 @@
   "skills.subtitle": "The tools and technologies I use to build server solutions",
 
   "contacts.title": "Get in touch",
-  "contacts.subtitle": "I am always open to new proposals, interesting projects and professional communication"
+  "contacts.subtitle": "I am always open to new proposals, interesting projects and professional communication",
+
+  "projects.title": "Projects",
+  "projects.subtitle": "My last projects"
 }
