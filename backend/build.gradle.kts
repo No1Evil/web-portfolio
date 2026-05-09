@@ -2,7 +2,7 @@ plugins {
     id("java-library")
 }
 
-allprojects {
+subprojects {
     apply(plugin = "java-library")
 
     repositories {
