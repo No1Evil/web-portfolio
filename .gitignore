@@ -1,5 +1,10 @@
 # Intellij Idea
 .idea/
+*.iws
+*.iml
+*.ipr
+out/
+
 # Gradle
 # Secrets
 **/.env**
