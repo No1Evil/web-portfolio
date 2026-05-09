@@ -1,3 +1,6 @@
+# Intellij Idea
 .idea/
+# Gradle
+# Secrets
 **/.env**
 !**/.env.example
