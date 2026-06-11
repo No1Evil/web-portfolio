@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  java-backend:
+    image: ghcr.io/<OWNER>/portfolio-backend:latest
+    container_name: backend-prod
+    restart: always
+    ports:
+      - "8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=postgres-db
+
+  web-angular:
+    image: ghcr.io/<OWNER>/portfolio-frontend:latest
+    container_name: frontend-prod
+    restart: always
+    environment:
+      - TEST=TEST
+    ports:
+      - "80:80"
+
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-prod
+    restart: always
+    environment:
+      POSTGRES_DB: portfolio
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pg-data:

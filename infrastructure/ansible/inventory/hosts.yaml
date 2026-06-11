@@ -1,0 +1,17 @@
+all:
+  hosts:
+    backend-node:
+      ansible_host: "{{ lookup('env', 'BACKEND_HOST') | default('localhost', true) }}"
+      ansible_user: "{{ lookup('env', 'BACKEND_USER') | default('root', true) }}"
+
+    web-node:
+      ansible_host: "{{ lookup('env', 'WEB_HOST') | default('localhost', true) }}"
+      ansible_user: "{{ lookup('env', 'WEB_USER') | default('root', true) }}"
+
+  children:
+    backend-servers:
+      hosts:
+        backend-node:
+    web-servers:
+      hosts:
+        web-node:

@@ -1,0 +1,21 @@
+---
+- name: Prepare server environment
+  hosts: all
+  become: yes
+  roles:
+    - server-prep
+  tags: setup
+
+- name: Deploy backend application
+  hosts: backend_servers
+  become: yes
+  roles:
+      - backend-java
+  tags: backend
+
+- name: Deploy frontend application
+  hosts: frontend_servers
+  become: yes
+  roles:
+      - web-angular
+  tags: frontend
