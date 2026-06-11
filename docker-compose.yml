@@ -1,20 +1,33 @@
 version: '3.8'
 
 services:
-  frontend-prod:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  java-backend:
+    build: ./backend
+    container_name: backend-prod
+    restart: always
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - DB_HOST=postgres-db
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
+  web-angular:
+    build: ./frontend
     container_name: frontend-prod
     restart: always
     ports:
       - "80:80"
+    depends_on:
+      - java-backend
 
-  frontend-test:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend-test
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: postgres-prod
     restart: always
-    ports:
-      - "8080:80"
+    environment:
+      POSTGRES_DB: portfolio
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  pg-data:
