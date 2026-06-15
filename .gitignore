@@ -1,3 +1,15 @@
+# Intellij Idea
 .idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Secrets
 **/.env**
 !**/.env.example
