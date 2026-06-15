@@ -2,7 +2,7 @@ name: Full Pipeline
 
 on:
   push:
-    branches: ["**"]
+    branches: ["main"]
 
 jobs:
   angular-tests:
