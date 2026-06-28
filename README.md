@@ -5,7 +5,7 @@
 - [Description](README.md#description)
 - [Tech Stack](README.md#tech-stack)
 - [Project Structure](README.md#description)
-- [Preview](README.md#description)
+- [Preview](README.md#preview)
 - [Author](README.md#author)
 - [License](README.md#license)
 
