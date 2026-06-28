@@ -66,4 +66,4 @@ Fjodor Tšumakov *(NotEvil)*
 
 ## License
 
-The project is under [MIT License](license)
+The project is under [MIT License](LICENSE)
