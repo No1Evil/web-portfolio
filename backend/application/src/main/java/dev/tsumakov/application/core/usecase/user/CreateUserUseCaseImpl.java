@@ -30,19 +30,24 @@ public class CreateUserUseCaseImpl implements CreateUserUseCase {
     var defaultRole = roleRepository.findByName(Role.USER_ROLE_NAME)
         .orElseThrow(() -> new ApplicationException("Default role not found"));
 
-    var user = new User(
+    var user = createUser(command, defaultRole);
+
+    userRepository.save(user);
+    return userDtoMapper.toDto(user);
+  }
+
+  public User createUser(CreateUserDto command, Role role) {
+    return new User(
         UUIDv7.randomUUID(),
         command.firstName(),
         command.secondName(),
         command.email(),
         command.avatarUrl(),
         command.password(),
-        Set.of(defaultRole),
+        Set.of(role),
         Set.of(),
         OffsetDateTime.now(),
         OffsetDateTime.now()
     );
-    userRepository.save(user);
-    return userDtoMapper.toDto(user);
   }
 }
