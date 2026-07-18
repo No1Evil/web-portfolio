@@ -14,8 +14,6 @@ public class DeleteUserContactUseCaseImpl implements DeleteUserContactUseCase {
 
   @Override
   public void execute(Integer id, UUID userId) {
-    userContactRepository.findById(id)
-        .filter(c -> c.userId().equals(userId))
-        .ifPresent(userContactRepository::delete);
+    userContactRepository.deleteByIdAndUserId(id, userId);
   }
 }

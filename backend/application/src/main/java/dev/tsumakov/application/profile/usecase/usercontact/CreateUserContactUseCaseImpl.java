@@ -19,15 +19,18 @@ public class CreateUserContactUseCaseImpl implements CreateUserContactUseCase {
 
   @Override
   public UserContactDto execute(CreateUserContactDto command) {
-    var contact = new UserContact(
-        null,
+    var contact = createUserContact(command);
+    userContactRepository.save(contact);
+    return userContactDtoMapper.toDto(contact);
+  }
+
+  private UserContact createUserContact(CreateUserContactDto command) {
+    return UserContact.createNew(
         command.userId(),
         command.title(),
         command.subtitle(),
         command.redirectUrl(),
         command.iconUrl()
     );
-    userContactRepository.save(contact);
-    return userContactDtoMapper.toDto(contact);
   }
 }

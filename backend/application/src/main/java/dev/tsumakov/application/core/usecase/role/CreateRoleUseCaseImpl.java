@@ -19,7 +19,7 @@ public class CreateRoleUseCaseImpl implements CreateRoleUseCase {
 
   @Override
   public RoleDto execute(CreateRoleDto command) {
-    var role = new Role(null, command.name());
+    var role = Role.createNew(command.name());
     roleRepository.save(role);
     return roleDtoMapper.toDto(role);
   }

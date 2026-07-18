@@ -19,15 +19,18 @@ public class CreateEducationUseCaseImpl implements CreateEducationUseCase {
 
   @Override
   public EducationDto execute(CreateEducationDto command) {
-    var education = new Education(
-        null,
+    var education = createEducation(command);
+    educationRepository.save(education);
+    return educationDtoMapper.toDto(education);
+  }
+
+  private Education createEducation(CreateEducationDto command) {
+    return Education.createNew(
         command.userId(),
         command.institution(),
         command.degree(),
         command.startDate(),
         command.endDate()
     );
-    educationRepository.save(education);
-    return educationDtoMapper.toDto(education);
   }
 }

@@ -19,8 +19,13 @@ public class CreateExperienceUseCaseImpl implements CreateExperienceUseCase {
 
   @Override
   public ExperienceDto execute(CreateExperienceDto command) {
-    var experience = new Experience(
-        null,
+    var experience = createExperience(command);
+    experienceRepository.save(experience);
+    return experienceDtoMapper.toDto(experience);
+  }
+
+  private Experience createExperience(CreateExperienceDto command){
+    return Experience.createNew(
         command.userId(),
         command.company(),
         command.position(),
@@ -28,7 +33,5 @@ public class CreateExperienceUseCaseImpl implements CreateExperienceUseCase {
         command.startDate(),
         command.endDate()
     );
-    experienceRepository.save(experience);
-    return experienceDtoMapper.toDto(experience);
   }
 }

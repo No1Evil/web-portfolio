@@ -21,11 +21,11 @@ class UpdateUserProfileUseCaseImplTest {
   @Mock
   private UserProfileRepository userProfileRepository;
 
-  private UpdateUserProfileUseCaseImpl useCase;
+  private CreateUserProfileUseCaseImpl useCase;
 
   @BeforeEach
   void setUp() {
-    useCase = new UpdateUserProfileUseCaseImpl(userProfileRepository, new UserProfileDtoMapperImpl());
+    useCase = new CreateUserProfileUseCaseImpl(userProfileRepository, new UserProfileDtoMapperImpl());
   }
 
   @Test

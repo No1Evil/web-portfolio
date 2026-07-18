@@ -7,19 +7,19 @@ import dev.tsumakov.application.profile.port.in.userprofile.UpdateUserProfileUse
 import dev.tsumakov.domain.profile.model.UserProfile;
 import dev.tsumakov.domain.profile.repository.UserProfileRepository;
 
-public class UpdateUserProfileUseCaseImpl implements UpdateUserProfileUseCase {
+public class CreateUserProfileUseCaseImpl implements UpdateUserProfileUseCase {
 
   private final UserProfileRepository userProfileRepository;
   private final UserProfileDtoMapper userProfileDtoMapper;
 
-  public UpdateUserProfileUseCaseImpl(UserProfileRepository userProfileRepository, UserProfileDtoMapper userProfileDtoMapper) {
+  public CreateUserProfileUseCaseImpl(UserProfileRepository userProfileRepository, UserProfileDtoMapper userProfileDtoMapper) {
     this.userProfileRepository = userProfileRepository;
     this.userProfileDtoMapper = userProfileDtoMapper;
   }
 
   @Override
   public UserProfileDto execute(UpdateUserProfileDto command) {
-    var profile = new UserProfile(command.userId(), command.title(), command.description());
+    var profile = UserProfile.createNew(command.userId(), command.title(), command.description());
     userProfileRepository.save(profile);
     return userProfileDtoMapper.toDto(profile);
   }
