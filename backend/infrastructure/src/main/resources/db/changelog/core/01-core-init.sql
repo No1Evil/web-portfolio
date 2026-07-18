@@ -12,8 +12,8 @@ create table if not exists core.users
     email       varchar(255) not null unique,
     avatar_url  text,
     password    varchar(255) not null,
-    created_at  timestamp with time zone default current_timestamp,
-    updated_at  timestamp with time zone default current_timestamp
+    created_at  timestamp with time zone not null default current_timestamp,
+    updated_at  timestamp with time zone not null default current_timestamp
 );
 
 --changeset dev:create-roles-table
