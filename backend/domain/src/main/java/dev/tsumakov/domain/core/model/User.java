@@ -9,7 +9,7 @@ import java.util.UUID;
 public record User(
     UUID id,
     String firstName,
-    String secondName,
+    String lastName,
     String email,
     String avatarUrl,
     String password,
@@ -23,7 +23,7 @@ public record User(
     DomainObjects.requireNonNull(id, "User ID must not be null");
     DomainObjects.requireNonNull(id);
     DomainObjects.requireNotBlank(firstName, "firstName");
-    DomainObjects.requireNotBlank(secondName, "secondName");
+    DomainObjects.requireNotBlank(lastName, "lastName");
     DomainObjects.requireNotBlank(email, "email");
     DomainObjects.requireNotBlank(password, "password");
     DomainObjects.requireNonNull(roles, "Roles set must not be null");

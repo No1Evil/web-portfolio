@@ -8,7 +8,7 @@ create table if not exists core.users
 (
     id          uuid primary key,
     first_name  varchar(50)  not null,
-    second_name varchar(50)  not null,
+    last_name varchar(50)  not null,
     email       varchar(255) not null unique,
     avatar_url  text,
     password    varchar(255) not null,

@@ -47,7 +47,7 @@ class CreateUserUseCaseImplTest {
 
     assertThat(result.id()).isNotNull();
     assertThat(result.firstName()).isEqualTo("John");
-    assertThat(result.secondName()).isEqualTo("Doe");
+    assertThat(result.lastName()).isEqualTo("Doe");
     assertThat(result.email()).isEqualTo("john@test.com");
     assertThat(result.avatarUrl()).isNull();
     assertThat(result.roles()).hasSize(1);
