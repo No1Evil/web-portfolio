@@ -20,7 +20,7 @@ create table if not exists core.users
 create table if not exists core.roles
 (
     id   integer generated always as identity primary key,
-    name varchar(20)
+    name varchar(20) not null unique
 );
 
 insert into core.roles (name) values ('USER');
