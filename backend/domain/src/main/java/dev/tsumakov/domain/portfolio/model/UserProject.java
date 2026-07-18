@@ -25,4 +25,16 @@ public record UserProject(
     isFeatured = Objects.requireNonNullElse(isFeatured, Boolean.FALSE);
   }
 
+  public static UserProject createNew(
+      UUID userId,
+      Map<String, String> title,
+      Map<String, String> description,
+      Set<Skill> skills,
+      Boolean isFeatured,
+      String projectUrl,
+      String previewImageUrl
+  ) {
+    return new UserProject(null, userId, title, description, skills, isFeatured, projectUrl, previewImageUrl);
+  }
+
 }

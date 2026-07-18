@@ -12,4 +12,8 @@ public record SkillCategory(
     DomainObjects.requireNotBlank(name, "name");
   }
 
+  public static SkillCategory createNew(String name, String iconUrl) {
+    return new SkillCategory(null, name, iconUrl);
+  }
+
 }

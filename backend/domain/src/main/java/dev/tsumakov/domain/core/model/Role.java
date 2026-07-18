@@ -14,4 +14,8 @@ public record Role(
     DomainObjects.requireNotBlank(name, "name");
   }
 
+  public static Role createNew(String name) {
+    return new Role(null, name);
+  }
+
 }

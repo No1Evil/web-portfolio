@@ -22,4 +22,15 @@ public record Experience(
     DomainObjects.requireNonNull(description, "Description map must not be null");
     DomainObjects.requireValidDates(startDate, endDate);
   }
+
+  public static Experience createNew(
+      UUID userId,
+      String company,
+      String position,
+      Map<String, String> description,
+      OffsetDateTime startDate,
+      OffsetDateTime endDate
+  ) {
+    return new Experience(null, userId, company, position, description, startDate, endDate);
+  }
 }
