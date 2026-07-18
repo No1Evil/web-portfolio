@@ -3,8 +3,12 @@ package dev.tsumakov.infrastructure.core.persistence.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -34,4 +38,13 @@ public class UserEntity {
 
   @Column(name = "updated_at", nullable = false)
   private OffsetDateTime updatedAt;
+
+  @ManyToMany
+  @JoinTable(
+      name = "user_roles",
+      schema = "core",
+      joinColumns = @JoinColumn(name = "user_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
+  private Set<RoleEntity> roles;
 }
