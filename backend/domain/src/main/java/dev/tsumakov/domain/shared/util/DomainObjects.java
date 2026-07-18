@@ -25,20 +25,15 @@ public final class DomainObjects {
   @SuppressWarnings("UnusedReturnValue")
   public static String requireNotBlank(String str, String fieldName) {
     if (str == null || str.isBlank()) {
-      throw new DomainValidationException(fieldName + "can not be null or blank");
+      throw new DomainValidationException(fieldName + " can not be null or blank");
     }
     return str;
   }
 
   public static void requireValidDates(OffsetDateTime start, OffsetDateTime end){
-    requireValidDates(start, end, false);
-  }
+    requireNonNull(start, " start date can not be null");
+    requireNonNull(end, " end date can not be null");
 
-  public static void requireValidDates(OffsetDateTime start, OffsetDateTime end, boolean nullCheck){
-    if (nullCheck) {
-      requireNonNull(start);
-      requireNonNull(end);
-    }
     if (start.isAfter(end)) {
       throw new DomainValidationException("Start date can not be after end date");
     }

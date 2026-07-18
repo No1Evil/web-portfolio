@@ -75,27 +75,27 @@ public class DomainObjectsTest {
   public void shouldNotThrowWhenValidDatesWithNullCheck() {
     OffsetDateTime start = OffsetDateTime.of(2020, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
     OffsetDateTime end = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-    assertThatCode(() -> DomainObjects.requireValidDates(start, end, true))
+    assertThatCode(() -> DomainObjects.requireValidDates(start, end))
         .doesNotThrowAnyException();
   }
 
   @Test
   public void shouldThrowWhenStartIsNullWithNullCheck() {
     OffsetDateTime end = OffsetDateTime.of(2024, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-    assertThatThrownBy(() -> DomainObjects.requireValidDates(null, end, true))
+    assertThatThrownBy(() -> DomainObjects.requireValidDates(null, end))
         .isInstanceOf(DomainValidationException.class);
   }
 
   @Test
   public void shouldThrowWhenEndIsNullWithNullCheck() {
     OffsetDateTime start = OffsetDateTime.of(2020, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
-    assertThatThrownBy(() -> DomainObjects.requireValidDates(start, null, true))
+    assertThatThrownBy(() -> DomainObjects.requireValidDates(start, null))
         .isInstanceOf(DomainValidationException.class);
   }
 
   @Test
   public void shouldThrowWhenBothDatesAreNullWithNullCheck() {
-    assertThatThrownBy(() -> DomainObjects.requireValidDates(null, null, true))
+    assertThatThrownBy(() -> DomainObjects.requireValidDates(null, null))
         .isInstanceOf(DomainValidationException.class);
   }
 }
