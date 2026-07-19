@@ -10,9 +10,13 @@ import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users", schema = "core")
+@Getter
+@Setter
 public class UserEntity {
 
   @Id
