@@ -13,5 +13,5 @@ public interface UserRepository {
 
   Optional<User> findByEmail(String email);
 
-  Optional<User> findByRole(Role role);
+  void delete(User user);
 }
