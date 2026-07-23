@@ -13,4 +13,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-liquibase")
     runtimeOnly("org.postgresql:postgresql")
+
+    implementation(libs.mapstruct)
+    annotationProcessor(libs.mapstruct.processor)
 }
