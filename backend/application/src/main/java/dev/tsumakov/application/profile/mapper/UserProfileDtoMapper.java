@@ -6,9 +6,12 @@ import java.util.Collection;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface UserProfileDtoMapper {
+
+  UserProfileDtoMapper INSTANCE = Mappers.getMapper(UserProfileDtoMapper.class);
 
   UserProfileDto toDto(UserProfile profile);
 

@@ -19,7 +19,7 @@ public class CreateSkillUseCaseImpl implements CreateSkillUseCase {
 
   @Override
   public SkillDto execute(CreateSkillDto command) {
-    var skill = new Skill(null, command.categoryId(), command.name());
+    var skill = Skill.createNew(command.categoryId(), command.name());
     skillRepository.save(skill);
     return skillDtoMapper.toDto(skill);
   }

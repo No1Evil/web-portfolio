@@ -8,19 +8,19 @@ create table if not exists core.users
 (
     id          uuid primary key,
     first_name  varchar(50)  not null,
-    second_name varchar(50)  not null,
+    last_name varchar(50)  not null,
     email       varchar(255) not null unique,
     avatar_url  text,
     password    varchar(255) not null,
-    created_at  timestamp with time zone default current_timestamp,
-    updated_at  timestamp with time zone default current_timestamp
+    created_at  timestamp with time zone not null default current_timestamp,
+    updated_at  timestamp with time zone not null default current_timestamp
 );
 
 --changeset dev:create-roles-table
 create table if not exists core.roles
 (
     id   integer generated always as identity primary key,
-    name varchar(20)
+    name varchar(20) not null unique
 );
 
 insert into core.roles (name) values ('USER');

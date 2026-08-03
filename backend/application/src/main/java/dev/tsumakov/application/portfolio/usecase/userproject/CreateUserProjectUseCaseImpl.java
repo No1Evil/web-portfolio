@@ -4,10 +4,13 @@ import dev.tsumakov.application.portfolio.dto.api.UserProjectDto;
 import dev.tsumakov.application.portfolio.dto.in.CreateUserProjectDto;
 import dev.tsumakov.application.portfolio.mapper.UserProjectDtoMapper;
 import dev.tsumakov.application.portfolio.port.in.userproject.CreateUserProjectUseCase;
+import dev.tsumakov.application.shared.exception.ApplicationException;
+import dev.tsumakov.domain.portfolio.model.Skill;
 import dev.tsumakov.domain.portfolio.model.UserProject;
 import dev.tsumakov.domain.portfolio.repository.SkillRepository;
 import dev.tsumakov.domain.portfolio.repository.UserProjectRepository;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CreateUserProjectUseCaseImpl implements CreateUserProjectUseCase {
@@ -28,13 +31,25 @@ public class CreateUserProjectUseCaseImpl implements CreateUserProjectUseCase {
 
   @Override
   public UserProjectDto execute(CreateUserProjectDto command) {
-    var skills = command.skillIds().stream()
-        .map(skillRepository::findById)
-        .flatMap(Optional::stream)
-        .collect(Collectors.toSet());
+    var skills = collectSkills(command);
+    var project = createUserProject(command, skills);
 
-    var project = new UserProject(
-        null,
+    userProjectRepository.save(project);
+    return userProjectDtoMapper.toDto(project);
+  }
+
+  private Set<Skill> collectSkills(CreateUserProjectDto command) {
+    var ids = command.skillIds();
+
+    return ids.stream()
+        .map(id ->
+            skillRepository.findById(id)
+            .orElseThrow(() -> new ApplicationException("Skill not found: " + id)))
+        .collect(Collectors.toSet());
+  }
+
+  private UserProject createUserProject(CreateUserProjectDto command, Set<Skill> skills) {
+    return UserProject.createNew(
         command.userId(),
         command.title(),
         command.description(),
@@ -43,7 +58,5 @@ public class CreateUserProjectUseCaseImpl implements CreateUserProjectUseCase {
         command.projectUrl(),
         command.previewImageUrl()
     );
-    userProjectRepository.save(project);
-    return userProjectDtoMapper.toDto(project);
   }
 }

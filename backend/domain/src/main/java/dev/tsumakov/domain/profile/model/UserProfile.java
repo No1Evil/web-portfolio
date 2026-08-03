@@ -14,4 +14,16 @@ public record UserProfile(
     DomainObjects.requireNonNull(userId, "User ID must not be null");
   }
 
+  public static UserProfile createNew(
+      UUID userId,
+      Map<String, String> title,
+      Map<String, String> description
+  ) {
+    return new UserProfile(userId, title, description);
+  }
+
+  public static UserProfile empty(UUID userId) {
+    return new UserProfile(userId, Map.of(), Map.of());
+  }
+
 }

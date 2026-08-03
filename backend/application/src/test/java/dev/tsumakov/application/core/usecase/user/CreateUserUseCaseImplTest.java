@@ -33,7 +33,8 @@ class CreateUserUseCaseImplTest {
 
   @BeforeEach
   void setUp() {
-    useCase = new CreateUserUseCaseImpl(userRepository, roleRepository, new UserDtoMapperImpl());
+    useCase = new CreateUserUseCaseImpl(userRepository, roleRepository, new UserDtoMapperImpl(),
+        rawPassword -> rawPassword);
   }
 
   @Test
@@ -47,7 +48,7 @@ class CreateUserUseCaseImplTest {
 
     assertThat(result.id()).isNotNull();
     assertThat(result.firstName()).isEqualTo("John");
-    assertThat(result.secondName()).isEqualTo("Doe");
+    assertThat(result.lastName()).isEqualTo("Doe");
     assertThat(result.email()).isEqualTo("john@test.com");
     assertThat(result.avatarUrl()).isNull();
     assertThat(result.roles()).hasSize(1);

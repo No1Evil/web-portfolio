@@ -19,4 +19,14 @@ public record UserContact(
     DomainObjects.requireNonNull(subtitle, "Subtitle map must not be null");
   }
 
+  public static UserContact createNew(
+      UUID userId,
+      Map<String, String> title,
+      Map<String, String> subtitle,
+      String redirectUrl,
+      String iconUrl
+  ) {
+    return new UserContact(null, userId, title, subtitle, redirectUrl, iconUrl);
+  }
+
 }

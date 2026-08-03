@@ -10,7 +10,7 @@ public interface RoleRepository {
 
   Optional<Role> findByName(String name);
 
-  void save(Role role);
+  Role save(Role role);
 
   void delete(Role role);
 

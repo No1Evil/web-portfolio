@@ -16,4 +16,6 @@ public interface ExperienceRepository {
   void delete(Experience experience);
 
   void deleteById(Integer id);
+
+  void deleteByIdAndUserId(Integer id, UUID userId);
 }

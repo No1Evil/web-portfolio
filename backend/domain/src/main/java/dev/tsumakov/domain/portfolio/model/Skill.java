@@ -12,4 +12,8 @@ public record Skill(
     DomainObjects.requireNotBlank(name, "name");
   }
 
+  public static Skill createNew(Integer categoryId, String name){
+    return new Skill(null, categoryId, name);
+  }
+
 }

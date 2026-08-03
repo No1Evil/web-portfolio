@@ -14,8 +14,6 @@ public class DeleteExperienceUseCaseImpl implements DeleteExperienceUseCase {
 
   @Override
   public void execute(Integer id, UUID userId) {
-    experienceRepository.findById(id)
-        .filter(e -> e.userId().equals(userId))
-        .ifPresent(experienceRepository::delete);
+    experienceRepository.deleteByIdAndUserId(id, userId);
   }
 }

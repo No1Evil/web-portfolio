@@ -22,7 +22,7 @@ public class CreateSkillCategoryUseCaseImpl implements CreateSkillCategoryUseCas
 
   @Override
   public SkillCategoryDto execute(CreateSkillCategoryDto command) {
-    var category = new SkillCategory(null, command.name(), command.iconUrl());
+    var category = SkillCategory.createNew(command.name(), command.iconUrl());
     skillCategoriesRepository.save(category);
     return skillCategoryDtoMapper.toDto(category);
   }

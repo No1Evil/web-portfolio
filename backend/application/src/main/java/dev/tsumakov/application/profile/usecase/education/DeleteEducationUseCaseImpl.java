@@ -14,8 +14,6 @@ public class DeleteEducationUseCaseImpl implements DeleteEducationUseCase {
 
   @Override
   public void execute(Integer id, UUID userId) {
-    educationRepository.findById(id)
-        .filter(e -> e.userId().equals(userId))
-        .ifPresent(educationRepository::delete);
+    educationRepository.deleteByIdAndUserId(id, userId);
   }
 }

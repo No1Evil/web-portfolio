@@ -9,9 +9,9 @@ public interface UserRepository {
 
   List<User> findAll();
 
-  void save(User user);
+  User save(User user);
 
   Optional<User> findByEmail(String email);
 
-  Optional<User> findByRole(Role role);
+  void delete(User user);
 }

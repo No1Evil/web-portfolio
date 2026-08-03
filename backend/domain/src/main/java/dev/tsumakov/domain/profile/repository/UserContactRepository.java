@@ -16,4 +16,6 @@ public interface UserContactRepository {
   void delete(UserContact userContact);
 
   void deleteById(Integer id);
+
+  void deleteByIdAndUserId(Integer id, UUID userId);
 }

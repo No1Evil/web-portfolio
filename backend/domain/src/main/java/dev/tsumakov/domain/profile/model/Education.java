@@ -21,4 +21,14 @@ public record Education(
     DomainObjects.requireNonNull(degree, "Degree map must not be null");
     DomainObjects.requireValidDates(startDate, endDate);
   }
+
+  public static Education createNew(
+      UUID userId,
+      Map<String, String> institution,
+      Map<String, String> degree,
+      OffsetDateTime startDate,
+      OffsetDateTime endDate
+  ) {
+    return new Education(null, userId, institution, degree, startDate, endDate);
+  }
 }
