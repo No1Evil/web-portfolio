@@ -33,7 +33,8 @@ class CreateUserUseCaseImplTest {
 
   @BeforeEach
   void setUp() {
-    useCase = new CreateUserUseCaseImpl(userRepository, roleRepository, new UserDtoMapperImpl());
+    useCase = new CreateUserUseCaseImpl(userRepository, roleRepository, new UserDtoMapperImpl(),
+        rawPassword -> rawPassword);
   }
 
   @Test
