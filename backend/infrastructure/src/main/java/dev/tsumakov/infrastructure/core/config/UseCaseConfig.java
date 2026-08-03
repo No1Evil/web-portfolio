@@ -16,6 +16,7 @@ import dev.tsumakov.application.core.usecase.user.GetAllUsersUseCaseImpl;
 import dev.tsumakov.application.core.usecase.user.GetUserByEmailUseCaseImpl;
 import dev.tsumakov.domain.core.repository.RoleRepository;
 import dev.tsumakov.domain.core.repository.UserRepository;
+import dev.tsumakov.domain.shared.util.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -39,8 +40,8 @@ public class UseCaseConfig {
 
   @Bean
   public CreateUserUseCase createUserUseCase(UserRepository userRepository,
-      RoleRepository roleRepository, UserDtoMapper userDtoMapper)  {
-    return new CreateUserUseCaseImpl(userRepository, roleRepository, userDtoMapper);
+      RoleRepository roleRepository, UserDtoMapper userDtoMapper, PasswordEncoder passwordEncoder)  {
+    return new CreateUserUseCaseImpl(userRepository, roleRepository, userDtoMapper, passwordEncoder);
   }
 
   @Bean
