@@ -29,6 +29,7 @@ create table if not exists core.skills
     id          integer generated always as identity primary key,
     category_id integer     references core.skill_categories (id) on delete set null,
     name        varchar(50) not null,
+    icon_url    text,
     created_at  timestamptz not null default current_timestamp,
     updated_at  timestamptz not null default current_timestamp,
     version     bigint      not null default 1,
