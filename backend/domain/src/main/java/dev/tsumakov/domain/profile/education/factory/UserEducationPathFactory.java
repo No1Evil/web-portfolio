@@ -14,10 +14,9 @@ public class UserEducationPathFactory {
 
   public UserEducationPath createNew(
       String title, String location, Map<String, String> description,
-      OffsetDateTime startDate, OffsetDateTime endDate, Boolean present,
-      OffsetDateTime createdAt, OffsetDateTime updatedAt
+      OffsetDateTime startDate, OffsetDateTime endDate, Boolean present
   ) {
     return new UserEducationPath(uuidGenerator.generate(), title, location,
-        description, startDate, endDate, present, createdAt, updatedAt, 1L);
+        description, startDate, endDate, present, OffsetDateTime.now(), OffsetDateTime.now(), 1L);
   }
 }
