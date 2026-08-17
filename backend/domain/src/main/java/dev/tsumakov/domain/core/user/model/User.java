@@ -14,7 +14,7 @@ public record User(
 ) {
 
   public User {
-    validateUserId();
+    validateUserId(id);
     DomainObjects.requireNotBlank(username, "username");
     DomainObjects.requireNotBlank(passwordHash, "passwordHash");
   }
@@ -27,7 +27,7 @@ public record User(
     return new User(id, username, passwordHash, createdAt, OffsetDateTime.now(), version + 1);
   }
 
-  private void validateUserId() {
+  private void validateUserId(Integer id) {
     DomainObjects.requireNonNull(id, "User ID must not be null");
     if (!id.equals(1)) {
       throw new UserIdValidationException("User without id '1' is prohibited");

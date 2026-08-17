@@ -18,7 +18,7 @@ public record UserSummary(
 ) {
 
   public UserSummary {
-    validateUserSummaryId();
+    validateUserSummaryId(id);
     DomainObjects.requireNotBlank(firstName, "firstName");
     DomainObjects.requireNotBlank(lastName, "lastName");
     DomainObjects.requireNotBlank(proficiency, "proficiency");
@@ -58,7 +58,7 @@ public record UserSummary(
         createdAt, OffsetDateTime.now(), version + 1);
   }
 
-  private void validateUserSummaryId() {
+  private void validateUserSummaryId(Integer id) {
     DomainObjects.requireNonNull(id, "UserSummary ID must not be null");
     if (!id.equals(1)) {
       throw new UserIdValidationException("User without id '1' is prohibited");

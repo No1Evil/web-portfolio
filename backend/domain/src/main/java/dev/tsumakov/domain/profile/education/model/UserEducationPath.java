@@ -27,7 +27,7 @@ public record UserEducationPath(
     DomainObjects.requireMapHasEngEntry(description);
     description = Map.copyOf(description);
 
-    validateDates();
+    validateDates(startDate, endDate);
     DomainObjects.requireNonNull(present);
     DomainObjects.requireNonNull(createdAt);
     DomainObjects.requireNonNull(updatedAt);
@@ -68,7 +68,7 @@ public record UserEducationPath(
         present, createdAt, OffsetDateTime.now(), version + 1);
   }
 
-  private void validateDates() {
+  private void validateDates(OffsetDateTime startDate, OffsetDateTime endDate) {
     if (startDate != null && endDate != null) {
       DomainObjects.requireValidDates(startDate, endDate);
     }
