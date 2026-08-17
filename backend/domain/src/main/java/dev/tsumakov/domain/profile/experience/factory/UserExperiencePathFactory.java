@@ -15,11 +15,10 @@ public class UserExperiencePathFactory {
 
   public UserExperiencePath createNew(
       String title, String companyName, String location, Map<String, String> description,
-      OffsetDateTime startDate, OffsetDateTime endDate, Boolean present,
-      OffsetDateTime createdAt, OffsetDateTime updatedAt
+      OffsetDateTime startDate, OffsetDateTime endDate, Boolean present
   ) {
     return new UserExperiencePath(uuidGenerator.generate(), title, companyName, location,
-        description, startDate, endDate, present, createdAt, updatedAt, 1L);
+        description, startDate, endDate, present, OffsetDateTime.now(), OffsetDateTime.now(), 1L);
   }
 
 }
