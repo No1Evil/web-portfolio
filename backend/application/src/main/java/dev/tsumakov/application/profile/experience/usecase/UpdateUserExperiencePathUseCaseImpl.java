@@ -1,6 +1,6 @@
 package dev.tsumakov.application.profile.experience.usecase;
 
-import dev.tsumakov.application.profile.education.dto.in.UpdateUserEducationPathDto;
+import dev.tsumakov.application.profile.experience.dto.in.UpdateUserExperiencePathDto;
 import dev.tsumakov.application.profile.experience.dto.outer.UserExperiencePathDto;
 import dev.tsumakov.application.profile.experience.exception.UserExperiencePathNotFoundException;
 import dev.tsumakov.application.profile.experience.mapper.UserExperiencePathDtoMapper;
@@ -22,9 +22,8 @@ public class UpdateUserExperiencePathUseCaseImpl implements UpdateUserExperience
     this.mapper = mapper;
   }
 
-  @Override
-  public UserExperiencePathDto execute(UpdateUserEducationPathDto command) {
-    var currentExperiencePath = findById(command.userEducationPathId());
+  public UserExperiencePathDto execute(UpdateUserExperiencePathDto command) {
+    var currentExperiencePath = findById(command.userExperiencePathId());
 
     var updated = currentExperiencePath;
     updated = updateTitle(updated, command.title());

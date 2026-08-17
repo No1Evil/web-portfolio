@@ -20,7 +20,9 @@ public class GetUserExperiencePathByIdUseCaseImpl implements GetUserExperiencePa
 
   @Override
   public UserExperiencePathDto execute(UUID userExperiencePathId) {
-    var foundExperiencePath = null
-    return mapper.toDto(foundExperiencePath);
+    var found = repository.findById(userExperiencePathId).orElseThrow(
+        () -> new UserExperiencePathNotFoundException(
+            "User experience path with id " + userExperiencePathId + " not found"));
+    return mapper.toDto(found);
   }
 }
