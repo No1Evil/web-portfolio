@@ -23,7 +23,7 @@ public class CreateSkillUseCaseImpl implements CreateSkillUseCase {
 
   @Override
   public SkillDto execute(CreateSkillDto command) {
-    Skill skill = skillFactory.createNew(command.categoryId(), command.name());
+    Skill skill = skillFactory.createNew(command.categoryId(), command.name(), command.iconUrl());
     return skillDtoMapper.toDto(skillRepository.create(skill));
   }
 }
