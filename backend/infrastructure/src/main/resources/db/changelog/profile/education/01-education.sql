@@ -12,8 +12,9 @@ create table if not exists profile.education_path
     start_date  timestamptz,
     end_date    timestamptz,
     present     boolean      not null,
-    created_at  timestamptz default current_timestamp,
-    updated_at  timestamptz default current_timestamp,
+    created_at  timestamptz           default current_timestamp,
+    updated_at  timestamptz           default current_timestamp,
+    version     bigint       not null default 1,
 
     constraint chk_education_dates check (
         (present = true and end_date is null) or
