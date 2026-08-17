@@ -9,5 +9,6 @@
   <include file="education/changelog-education.xml" relativeToChangelogFile="true"/>
   <include file="experience/changelog-experience.xml" relativeToChangelogFile="true"/>
   <include file="skills/changelog-skills.xml" relativeToChangelogFile="true"/>
+  <include file="summary/changelog-summary.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
