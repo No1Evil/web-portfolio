@@ -6,6 +6,7 @@ public record SkillDto(
     Integer id,
     Integer categoryId,
     String name,
+    String iconUrl,
     OffsetDateTime createdAt,
     OffsetDateTime updatedAt
 ) {
