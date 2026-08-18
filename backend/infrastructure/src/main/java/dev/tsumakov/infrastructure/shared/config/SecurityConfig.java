@@ -20,7 +20,7 @@ public class SecurityConfig {
   }
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity httpSecurity) {
     httpSecurity.csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
