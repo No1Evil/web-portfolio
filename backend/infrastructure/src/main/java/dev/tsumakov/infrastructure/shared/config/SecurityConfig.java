@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,8 +21,14 @@ public class SecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf(AbstractHttpConfigurer::disable) // Disable CSRF
-        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // TODO secure admin endpoints
+    httpSecurity.csrf(AbstractHttpConfigurer::disable)
+        .sessionManagement(session -> session
+            .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+        )
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+            .anyRequest().permitAll()
+        );
     return httpSecurity.build();
   }
 
