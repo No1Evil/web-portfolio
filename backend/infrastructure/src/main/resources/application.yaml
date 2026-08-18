@@ -4,6 +4,9 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+  mvc:
+    problemdetails:
+      enabled: true
 
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
