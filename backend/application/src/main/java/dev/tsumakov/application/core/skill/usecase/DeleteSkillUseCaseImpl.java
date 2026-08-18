@@ -12,7 +12,7 @@ public class DeleteSkillUseCaseImpl implements DeleteSkillUseCase {
   }
 
   @Override
-  public void delete(Integer skillId) {
+  public void execute(Integer skillId) {
     skillRepository.delete(skillId);
   }
 }

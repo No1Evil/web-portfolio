@@ -25,7 +25,7 @@ class DeleteSkillUseCaseImplTest {
 
   @Test
   void shouldDeleteSkillById() {
-    useCase.delete(7);
+    useCase.execute(7);
 
     verify(repository).delete(7);
   }
