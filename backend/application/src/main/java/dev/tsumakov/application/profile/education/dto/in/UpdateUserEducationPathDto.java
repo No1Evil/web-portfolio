@@ -7,7 +7,6 @@ import java.util.UUID;
 public record UpdateUserEducationPathDto(
     UUID userEducationPathId,
     String title,
-    String companyName,
     String location,
     Map<String, String> description,
     OffsetDateTime startDate,
