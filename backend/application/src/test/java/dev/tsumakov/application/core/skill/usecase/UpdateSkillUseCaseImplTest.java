@@ -59,7 +59,7 @@ class UpdateSkillUseCaseImplTest {
   void shouldUpdateAllProvidedFieldsWithIncrementedVersion() {
     var command = new UpdateSkillDto(1, 2, "Kotlin", "kotlin.svg");
     var saved = new Skill(1, 2, "Kotlin", "kotlin.svg", NOW, NOW, 4L);
-    var expectedDto = new SkillDto(1, 2, "Kotlin");
+    var expectedDto = new SkillDto(1, 2, "Kotlin", "kotlin.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(currentSkill()));
     when(repository.update(any())).thenReturn(saved);
@@ -83,7 +83,7 @@ class UpdateSkillUseCaseImplTest {
   void shouldNotCallUpdateWhenNoFieldProvided() {
     var command = new UpdateSkillDto(1, null, null, null);
     var current = currentSkill();
-    var expectedDto = new SkillDto(1, 1, "Java");
+    var expectedDto = new SkillDto(1, 1, "Java", "icon.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(current));
     when(mapper.toDto(current)).thenReturn(expectedDto);
@@ -101,7 +101,7 @@ class UpdateSkillUseCaseImplTest {
 
     when(repository.findById(1)).thenReturn(Optional.of(current));
     when(repository.update(any())).thenReturn(current.updateName("Kotlin"));
-    when(mapper.toDto(any())).thenReturn(new SkillDto(1, 1, "Kotlin"));
+    when(mapper.toDto(any())).thenReturn(new SkillDto(1, 1, "Kotlin", null, NOW, NOW));
 
     useCase.execute(command);
 

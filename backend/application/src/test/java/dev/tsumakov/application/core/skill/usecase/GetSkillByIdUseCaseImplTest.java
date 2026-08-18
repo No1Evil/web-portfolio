@@ -39,7 +39,7 @@ class GetSkillByIdUseCaseImplTest {
   @Test
   void shouldReturnSkillDtoWhenFound() {
     var skill = new Skill(1, 1, "Java", "icon.svg", NOW, NOW, 1L);
-    var expectedDto = new SkillDto(1, 1, "Java");
+    var expectedDto = new SkillDto(1, 1, "Java", "icon.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(skill));
     when(mapper.toDto(skill)).thenReturn(expectedDto);

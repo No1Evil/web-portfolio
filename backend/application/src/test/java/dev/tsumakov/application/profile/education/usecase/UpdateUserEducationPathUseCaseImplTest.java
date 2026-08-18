@@ -51,7 +51,7 @@ class UpdateUserEducationPathUseCaseImplTest {
   void shouldThrowNotFoundExceptionWhenPathMissing() {
     when(repository.findById(ID)).thenReturn(Optional.empty());
 
-    assertThatThrownBy(() -> useCase.execute(new UpdateUserEducationPathDto(ID, null, null, null, null, null, null, null)))
+    assertThatThrownBy(() -> useCase.execute(new UpdateUserEducationPathDto(ID, null, null, null, null, null, null)))
         .isInstanceOf(UserEducationPathNotFoundException.class)
         .hasMessage("User education path with id " + ID + " not found");
 
@@ -60,7 +60,7 @@ class UpdateUserEducationPathUseCaseImplTest {
 
   @Test
   void shouldUpdateAllProvidedFields() {
-    var command = new UpdateUserEducationPathDto(ID, "Harvard", null, "Cambridge", Map.of("en", "MSc"), NOW.minusYears(1), NOW.plusYears(3), true);
+    var command = new UpdateUserEducationPathDto(ID, "Harvard", "Cambridge", Map.of("en", "MSc"), NOW.minusYears(1), NOW.plusYears(3), true);
     var current = currentPath();
     var saved = new UserEducationPath(ID, "Harvard", "Cambridge", Map.of("en", "MSc"), NOW.minusYears(1), NOW.plusYears(3), true, NOW, NOW, 3L);
     var expectedDto = new UserEducationPathDto(ID, "Harvard", "Cambridge", Map.of("en", "MSc"), NOW.minusYears(1), NOW.plusYears(3), true, NOW, NOW);
@@ -86,7 +86,7 @@ class UpdateUserEducationPathUseCaseImplTest {
 
   @Test
   void shouldNotCallUpdateWhenNoFieldProvided() {
-    var command = new UpdateUserEducationPathDto(ID, null, null, null, null, null, null, null);
+    var command = new UpdateUserEducationPathDto(ID, null, null, null, null, null, null);
     var current = currentPath();
     var expectedDto = new UserEducationPathDto(ID, "MIT", "Boston", Map.of("en", "BSc"), NOW, NOW.plusYears(4), false, NOW, NOW);
 
@@ -101,7 +101,7 @@ class UpdateUserEducationPathUseCaseImplTest {
 
   @Test
   void shouldPartiallyUpdateOnlyProvidedFields() {
-    var command = new UpdateUserEducationPathDto(ID, null, null, "Seattle", null, null, null, null);
+    var command = new UpdateUserEducationPathDto(ID, null, "Seattle", null, null, null, null);
     var current = currentPath();
 
     when(repository.findById(ID)).thenReturn(Optional.of(current));
@@ -120,7 +120,7 @@ class UpdateUserEducationPathUseCaseImplTest {
 
   @Test
   void shouldPropagateDomainValidationExceptionWhenTitleIsBlank() {
-    var command = new UpdateUserEducationPathDto(ID, "  ", null, null, null, null, null, null);
+    var command = new UpdateUserEducationPathDto(ID, "  ", null, null, null, null, null);
 
     when(repository.findById(ID)).thenReturn(Optional.of(currentPath()));
 

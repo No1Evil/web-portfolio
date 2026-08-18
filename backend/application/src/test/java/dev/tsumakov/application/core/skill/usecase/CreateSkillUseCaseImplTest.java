@@ -44,7 +44,7 @@ class CreateSkillUseCaseImplTest {
     var command = new CreateSkillDto(2, "Java", "icon.svg");
     var freshSkill = new Skill(null, 2, "Java", "icon.svg", NOW, NOW, 1L);
     var savedSkill = new Skill(1, 2, "Java", "icon.svg", NOW, NOW, 1L);
-    var expectedDto = new SkillDto(1, 2, "Java");
+    var expectedDto = new SkillDto(1, 2, "Java", "icon.svg", NOW, NOW);
 
     when(factory.createNew(command.categoryId(), command.name(), command.iconUrl()))
         .thenReturn(freshSkill);

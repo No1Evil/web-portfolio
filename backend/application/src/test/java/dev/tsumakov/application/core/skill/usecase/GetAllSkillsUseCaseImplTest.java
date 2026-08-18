@@ -38,8 +38,8 @@ class GetAllSkillsUseCaseImplTest {
   void shouldReturnAllSkillsMapped() {
     var java = new Skill(1, 1, "Java", "icon.svg", NOW, NOW, 1L);
     var kotlin = new Skill(2, 1, "Kotlin", null, NOW, NOW, 1L);
-    var javaDto = new SkillDto(1, 1, "Java");
-    var kotlinDto = new SkillDto(2, 1, "Kotlin");
+    var javaDto = new SkillDto(1, 1, "Java", "icon.svg", NOW, NOW);
+    var kotlinDto = new SkillDto(2, 1, "Kotlin", null, NOW, NOW);
 
     when(repository.findAll()).thenReturn(List.of(java, kotlin));
     when(mapper.toDto(java)).thenReturn(javaDto);
