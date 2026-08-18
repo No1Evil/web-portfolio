@@ -27,8 +27,12 @@ public class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   @Override
   public UserDto execute(AuthenticateUserDto command) {
     User user = repository.findByUsername(command.username()).orElse(null);
-    String hash = user == null ? DUMMY_HASH : user.passwordHash();
-    validatePassword(command.password(), hash);
+    if (user == null ) {
+      validatePassword(command.password(), DUMMY_HASH);
+      throw new InvalidCredentialsException("Invalid username or password");
+    } else {
+      validatePassword(command.password(), user.passwordHash());
+    }
     return mapper.toDto(user);
   }
 
