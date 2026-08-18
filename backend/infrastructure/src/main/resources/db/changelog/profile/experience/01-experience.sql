@@ -3,7 +3,7 @@
 --changeset dev:create-profile-schema
 create schema if not exists profile;
 
-create table if not exists profile.experience_path
+create table if not exists profile.experience_paths
 (
     id           uuid primary key,
     title        varchar(255) not null,
