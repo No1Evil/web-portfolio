@@ -11,7 +11,7 @@ import dev.tsumakov.domain.shared.util.PasswordEncoder;
 
 public class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
 
-  private static final String DUMMY_HASH = "$3a$15$wN3I.r/KqW42eP9YkNmB/.V/XyYfO/.6lD1b2jP7JvJ5x1iC1q7/2";
+  private static final String DUMMY_HASH = "$2a$15$eNW3yDbtrnK8.l1YC2gd/ODX9abTGe/P0V2AYohH7OlkfxngeNZBq";
 
   private final UserRepository repository;
   private final PasswordEncoder passwordEncoder;
