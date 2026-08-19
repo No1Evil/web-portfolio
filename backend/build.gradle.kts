@@ -1,3 +1,5 @@
+import org.gradle.testing.jacoco.tasks.JacocoReport
+
 plugins {
     id("java-library")
 
@@ -5,6 +7,7 @@ plugins {
 
 subprojects {
     apply(plugin = "java-library")
+    apply(plugin = "jacoco")
 
     repositories {
         mavenCentral()
@@ -32,5 +35,11 @@ subprojects {
 
     javaToolchains {
         version = JavaVersion.VERSION_21
+    }
+
+    tasks.withType<JacocoReport> {
+        reports {
+            csv.required.set(true)
+        }
     }
 }

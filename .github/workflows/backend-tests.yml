@@ -20,7 +20,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: backend-ci-${{ github.ref }}
@@ -50,7 +50,23 @@ jobs:
       - name: Run tests
         run: |
           chmod +x gradlew
-          ./gradlew test --console=plain
+          ./gradlew test jacocoTestReport --console=plain
+
+      - name: Generate JaCoCo badge
+        id: jacoco
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          jacoco-csv-file: "**/jacocoTestReport.csv"
+          generate-branches-badge: true
+
+      - name: Commit coverage badge
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update JaCoCo coverage badge"
+          branch: badges
+          create_branch: true
+          file_pattern: .github/badges/*.svg
 
       - name: Upload test reports
         if: always()
