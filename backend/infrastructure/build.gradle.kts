@@ -1,3 +1,6 @@
+import org.gradle.kotlin.dsl.named
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
@@ -26,6 +29,18 @@ dependencies {
     testImplementation("org.mockito:mockito-junit-jupiter")
     testImplementation("org.assertj:assertj-core")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.named<BootBuildImage>("bootBuildImage") {
+    val gradleProviders = providers
+    imageName.set(gradleProviders.gradleProperty("imageName").orElse("portfolio-backend"))
+    publish.set(gradleProviders.gradleProperty("publishImage").map { it.toBoolean() }.orElse(false))
+    docker {
+        publishRegistry {
+            username.set(gradleProviders.environmentVariable("REGISTRY_USERNAME").orElse(""))
+            password.set(gradleProviders.environmentVariable("REGISTRY_PASSWORD").orElse(""))
+        }
+    }
 }
 
 tasks.test {
