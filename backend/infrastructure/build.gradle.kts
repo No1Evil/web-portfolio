@@ -14,7 +14,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-liquibase")
     implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation(libs.uuid.creator)
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.2")
     runtimeOnly("org.postgresql:postgresql")
 
