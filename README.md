@@ -2,8 +2,14 @@
 
 [![Backend CI](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
 [![Backend CD](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml)
+
 [![Coverage](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/jacoco.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
 [![Branches](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/branches.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
+
+![License](https://img.shields.io/github/license/No1Evil/web-portfolio?style=plastic&color=orange)
+![Repo Size](https://img.shields.io/github/repo-size/No1Evil/web-portfolio?style=plastic)
+![Last Commit](https://img.shields.io/github/last-commit/No1Evil/web-portfolio?style=plastic)
+![Open PRs](https://img.shields.io/github/issues-pr/No1Evil/web-portfolio?style=plastic)
 
 ## Navigation
 
