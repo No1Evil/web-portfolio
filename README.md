@@ -1,5 +1,10 @@
 # Web portfolio CMS
 
+[![Backend CI](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
+[![Backend CD](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml)
+[![Coverage](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/jacoco.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
+[![Branches](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/branches.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
+
 ## Navigation
 
 - [Description](README.md#description)
