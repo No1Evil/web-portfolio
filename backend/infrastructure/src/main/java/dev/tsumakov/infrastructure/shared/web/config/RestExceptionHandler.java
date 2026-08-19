@@ -4,6 +4,7 @@ import dev.tsumakov.application.core.user.exception.PasswordValidationException;
 import dev.tsumakov.application.shared.exception.ApplicationException;
 import dev.tsumakov.domain.core.user.exception.UserIdValidationException;
 import dev.tsumakov.domain.shared.exception.DomainValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+@Slf4j
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -44,6 +46,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ProblemDetail> handleInternalError(Exception e) {
+    log.atError().log(e.getMessage());
     var detail =
         ProblemDetail.forStatusAndDetail(HttpStatus.INTERNAL_SERVER_ERROR,
             "An unexpected error occurred");
