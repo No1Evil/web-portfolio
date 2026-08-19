@@ -8,9 +8,9 @@ spring:
     problemdetails:
       enabled: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/mydb
-    username: myuser
-    password: mypassword
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:mydb}
+    username: ${DATABASE_USER:myuser}
+    password: ${DATABASE_PASSWORD:mypassword}
     driver-class-name: org.postgresql.Driver
 
   liquibase:
