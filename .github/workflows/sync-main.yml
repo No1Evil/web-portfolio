@@ -1,9 +1,7 @@
 name: Sync main from dev
 
 on:
-  push:
-    branches:
-      - dev
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,17 +11,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+#  check-branch:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Verify dev branch
+#        if: github.ref_name != 'dev'
+#        run: |
+#          echo "Error: could be ran only on 'dev' branch."
+#          exit 1
+
   sync:
+#    needs: check-branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v7
         with:
+          repository: ${{ github.repository }}
+          token: '${{ secrets.SYNC_TOKEN }}'
           fetch-depth: 0
 
       - name: Fast-forward main to dev
+        env:
+          GIT_TERMINAL_PROMPT: 0
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin '+refs/heads/main:refs/remotes/origin/main'
-          git push --force-with-lease "https://x-access-token:${{ secrets.SYNC_TOKEN }}@github.com/${{ github.repository }}.git" HEAD:main
+          git push origin HEAD:refs/heads/main --force-with-lease
+
+  run-backend-ci:
+    needs: sync
+    uses: ./.github/workflows/backend-tests.yml
+    with:
+      ref: main
+    secrets: inherit
+
+  run-backend-deploy:
+    needs: run-backend-ci
+    uses: ./.github/workflows/backend-deploy.yml
+    with:
+      ref: main
+    secrets: inherit

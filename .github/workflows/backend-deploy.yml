@@ -1,9 +1,7 @@
 name: Backend CD
 
 on:
-  workflow_run:
-    workflows: ['Backend CI']
-    types: [completed]
+  workflow_call:
   workflow_dispatch:
 
 permissions:
@@ -40,7 +38,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
 
       - name: Build and push image
         working-directory: backend
