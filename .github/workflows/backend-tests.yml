@@ -54,6 +54,7 @@ jobs:
           commit_message: "Update JaCoCo coverage badge"
           branch: badges
           create_branch: true
+          push_options: '--force'
           file_pattern: .github/badges/*.svg
 
       - name: Upload test reports
