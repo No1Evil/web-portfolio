@@ -3,6 +3,7 @@ package dev.tsumakov.infrastructure.core.skill.persistence.repository;
 import dev.tsumakov.domain.core.skill.model.Skill;
 import dev.tsumakov.domain.core.skill.repository.SkillRepository;
 import dev.tsumakov.infrastructure.core.skill.persistence.mapper.SkillEntityMapper;
+import dev.tsumakov.infrastructure.core.skillcategory.persistence.repository.SkillCategorySpringDataRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 public class SkillRepositoryImpl implements SkillRepository {
 
   private final SkillSpringDataRepository repository;
+  private final SkillCategorySpringDataRepository skillCategoryRepository;
   private final SkillEntityMapper mapper;
 
   @Override
@@ -39,7 +41,9 @@ public class SkillRepositoryImpl implements SkillRepository {
   public Skill create(Skill entity) {
     var entityToSave = mapper.toEntity(entity);
     entityToSave.setId(null);
-
+    entityToSave.setSkillCategory(
+      skillCategoryRepository.getReferenceById(entity.categoryId())
+    );
     var savedEntity = repository.save(entityToSave);
     return mapper.toDomain(savedEntity);
   }

@@ -13,6 +13,7 @@ import dev.tsumakov.application.core.skill.usecase.GetSkillByIdUseCaseImpl;
 import dev.tsumakov.application.core.skill.usecase.UpdateSkillUseCaseImpl;
 import dev.tsumakov.domain.core.skill.factory.SkillFactory;
 import dev.tsumakov.domain.core.skill.repository.SkillRepository;
+import dev.tsumakov.domain.core.skillcategory.repository.SkillCategoryRepository;
 import dev.tsumakov.infrastructure.core.skill.usecase.TransactionalCreateSkillUseCase;
 import dev.tsumakov.infrastructure.core.skill.usecase.TransactionalDeleteSkillUseCase;
 import dev.tsumakov.infrastructure.core.skill.usecase.TransactionalUpdateSkillUseCase;
@@ -34,30 +35,36 @@ public class SkillUseCaseConfig {
   }
 
   @Bean
-  public CreateSkillUseCase createSkillUseCase(SkillFactory skillFactory, SkillRepository skillRepository,
+  public CreateSkillUseCase createSkillUseCase(SkillFactory skillFactory,
+      SkillRepository skillRepository, SkillCategoryRepository skillCategoryRepository,
       SkillDtoMapper mapper, TransactionTemplate transactionTemplate) {
     return new TransactionalCreateSkillUseCase(
-        new CreateSkillUseCaseImpl(skillFactory, skillRepository, mapper), transactionTemplate);
+        new CreateSkillUseCaseImpl(skillFactory, skillRepository, skillCategoryRepository, mapper), transactionTemplate);
   }
 
   @Bean
   public UpdateSkillUseCase updateSkillUseCase(SkillRepository repository, SkillDtoMapper mapper,
       TransactionTemplate transactionTemplate) {
-    return new TransactionalUpdateSkillUseCase(new UpdateSkillUseCaseImpl(repository, mapper), transactionTemplate);
+    return new TransactionalUpdateSkillUseCase(new UpdateSkillUseCaseImpl(repository, mapper),
+        transactionTemplate);
   }
 
   @Bean
-  public DeleteSkillUseCase deleteSkillUseCase(SkillRepository repository, TransactionTemplate transactionTemplate) {
-    return new TransactionalDeleteSkillUseCase(new DeleteSkillUseCaseImpl(repository), transactionTemplate);
+  public DeleteSkillUseCase deleteSkillUseCase(SkillRepository repository,
+      TransactionTemplate transactionTemplate) {
+    return new TransactionalDeleteSkillUseCase(new DeleteSkillUseCaseImpl(repository),
+        transactionTemplate);
   }
 
   @Bean
-  public GetAllSkillsUseCase getAllSkillsUseCase(SkillRepository repository, SkillDtoMapper mapper) {
+  public GetAllSkillsUseCase getAllSkillsUseCase(SkillRepository repository,
+      SkillDtoMapper mapper) {
     return new GetAllSkillsUseCaseImpl(repository, mapper);
   }
 
   @Bean
-  public GetSkillByIdUseCase getSkillByIdUseCase(SkillRepository repository, SkillDtoMapper mapper) {
+  public GetSkillByIdUseCase getSkillByIdUseCase(SkillRepository repository,
+      SkillDtoMapper mapper) {
     return new GetSkillByIdUseCaseImpl(repository, mapper);
   }
 
