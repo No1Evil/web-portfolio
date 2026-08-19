@@ -5,7 +5,6 @@ on:
     branches:
       - dev
       - main
-      - feature/badges
     paths:
       - 'backend/**'
       - '.github/workflows/backend-deploy.yml'
@@ -14,7 +13,6 @@ on:
     branches:
       - dev
       - main
-      - feature/badges
     paths:
       - 'backend/**'
       - '.github/workflows/backend-deploy.yml'
