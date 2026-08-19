@@ -6,7 +6,6 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.xml
     parameters:
       admin-username: ${ADMIN_USERNAME}
       admin-password-hash: ${ADMIN_PASSWORD_HASH}
