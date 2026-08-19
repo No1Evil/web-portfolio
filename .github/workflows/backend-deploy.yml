@@ -1,6 +1,12 @@
 name: Backend CD
 
 on:
+  push:
+    branches:
+      - cicd/backend # for removal
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-deploy.yml'
   workflow_run:
     workflows: ['Backend CI']
     types: [completed]
