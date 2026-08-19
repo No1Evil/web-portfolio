@@ -20,7 +20,6 @@ public record UserExperiencePath(
 ) {
 
   public UserExperiencePath {
-    DomainObjects.requireNonNull(id, "UserExperiencePath ID must not be null");
     DomainObjects.requireNotBlank(title, "title");
     DomainObjects.requireNotBlank(companyName, "companyName");
     DomainObjects.requireNotBlank(location, "location");

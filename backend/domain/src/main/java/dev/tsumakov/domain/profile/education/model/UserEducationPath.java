@@ -19,7 +19,6 @@ public record UserEducationPath(
 ) {
 
   public UserEducationPath {
-    DomainObjects.requireNonNull(id, "UserEducationPath ID must not be null");
     DomainObjects.requireNotBlank(title, "title");
     DomainObjects.requireNotBlank(location, "location");
 
