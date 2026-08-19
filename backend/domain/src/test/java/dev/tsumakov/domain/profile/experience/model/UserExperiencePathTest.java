@@ -2,6 +2,7 @@ package dev.tsumakov.domain.profile.experience.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import dev.tsumakov.domain.shared.exception.DomainValidationException;
@@ -30,12 +31,10 @@ public class UserExperiencePathTest {
   }
 
   @Test
-  public void shouldThrowExceptionWhenIdIsNull() {
-    assertThatThrownBy(
+  public void shouldNotThrowExceptionWhenIdIsNull() {
+    assertThatNoException().isThrownBy(
         () -> new UserExperiencePath(null, "Software Engineer", "Acme Corp", "Berlin",
-            Map.of("en", "Built stuff"), START, END, false, CREATED_AT, UPDATED_AT, 2L))
-        .isInstanceOf(DomainValidationException.class)
-        .hasMessage("UserExperiencePath ID must not be null");
+            Map.of("en", "Built stuff"), START, END, false, CREATED_AT, UPDATED_AT, 2L));
   }
 
   @Test

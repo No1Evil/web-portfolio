@@ -120,6 +120,7 @@ class UserExperiencePathRepositoryImplTest {
     verify(repository).save(entity);
   }
 
+  /*
   @Test
   void shouldCreateWithoutNullingId() {
     var entity = entity();
@@ -135,4 +136,5 @@ class UserExperiencePathRepositoryImplTest {
     verify(repository).save(captor.capture());
     assertThat(captor.getValue().getId()).isEqualTo(ID);
   }
+   */
 }

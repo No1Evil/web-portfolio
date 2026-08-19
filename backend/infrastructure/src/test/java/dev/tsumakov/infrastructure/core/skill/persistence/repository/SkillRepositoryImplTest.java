@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import dev.tsumakov.domain.core.skill.model.Skill;
 import dev.tsumakov.infrastructure.core.skill.persistence.entity.SkillEntity;
 import dev.tsumakov.infrastructure.core.skill.persistence.mapper.SkillEntityMapper;
+import dev.tsumakov.infrastructure.core.skillcategory.persistence.repository.SkillCategorySpringDataRepository;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,13 +27,15 @@ class SkillRepositoryImplTest {
   @Mock
   private SkillSpringDataRepository repository;
   @Mock
+  private SkillCategorySpringDataRepository skillCategoryRepository;
+  @Mock
   private SkillEntityMapper mapper;
 
   private SkillRepositoryImpl repositoryImpl;
 
   @BeforeEach
   void setUp() {
-    repositoryImpl = new SkillRepositoryImpl(repository, mapper);
+    repositoryImpl = new SkillRepositoryImpl(repository, skillCategoryRepository, mapper);
   }
 
   private SkillEntity entity(int id) {

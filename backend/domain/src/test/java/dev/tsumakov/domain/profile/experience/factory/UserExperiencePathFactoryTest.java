@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public class UserExperiencePathFactoryTest {
 
-  private static final UUID GENERATED_ID = UUID.randomUUID();
+  private static final UUID GENERATED_ID = null;
   private static final OffsetDateTime START = OffsetDateTime.parse("2020-01-01T10:00:00Z");
   private static final OffsetDateTime END = OffsetDateTime.parse("2024-01-01T10:00:00Z");
 
   private final UserExperiencePathFactory factory =
-      new UserExperiencePathFactory(() -> GENERATED_ID);
+      new UserExperiencePathFactory();
 
   @Test
   public void shouldCreateNewExperienceWithDefaultsAndGeneratedId() {

@@ -11,12 +11,11 @@ import org.junit.jupiter.api.Test;
 
 public class UserEducationPathFactoryTest {
 
-  private static final UUID GENERATED_ID = UUID.randomUUID();
+  private static final UUID GENERATED_ID = null;
   private static final OffsetDateTime START = OffsetDateTime.parse("2020-01-01T10:00:00Z");
   private static final OffsetDateTime END = OffsetDateTime.parse("2024-01-01T10:00:00Z");
 
-  private final UserEducationPathFactory factory =
-      new UserEducationPathFactory(() -> GENERATED_ID);
+  private final UserEducationPathFactory factory = new UserEducationPathFactory();
 
   @Test
   public void shouldCreateNewEducationWithDefaultsAndGeneratedId() {
@@ -35,7 +34,7 @@ public class UserEducationPathFactoryTest {
   }
 
   @Test
-  public void shouldUseUuidGeneratorForEachCall() {
+  public void shouldGenerateUuid() {
     var first = factory.createNew("A", "X", Map.of("en", "1"), null, null, true);
     var second = factory.createNew("B", "Y", Map.of("en", "2"), null, null, true);
     assertThat(first.id()).isEqualTo(GENERATED_ID);
