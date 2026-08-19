@@ -5,18 +5,7 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
 
-  <changeSet id="0-create-schemas" author="admin">
-    <sql>
-      create schema if not exists core;
-      create schema if not exists servers;
-      create schema if not exists content;
-      create schema if not exists shop;
-    </sql>
-  </changeSet>
-
-  <include file="db/changelog/core/01-core-init.sql"/>
-  <include file="db/changelog/portfolio/01-portfolio-init.sql"/>
-  <include file="/db/changelog/profile/01-profile-init.sql"/>
-  <include file="db/changelog/content/01-content-init.sql"/>
+  <include file="core/changelog-core.xml" relativeToChangelogFile="true"/>
+  <include file="profile/changelog-profile.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

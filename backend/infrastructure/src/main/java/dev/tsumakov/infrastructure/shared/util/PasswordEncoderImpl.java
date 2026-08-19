@@ -15,4 +15,9 @@ public class PasswordEncoderImpl implements dev.tsumakov.domain.shared.util.Pass
     return passwordEncoder.encode(rawPassword);
   }
 
+  @Override
+  public boolean matches(String rawPassword, String encodedPassword) {
+    return passwordEncoder.matches(rawPassword, encodedPassword);
+  }
+
 }

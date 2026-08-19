@@ -4,6 +4,24 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+  mvc:
+    problemdetails:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
 
   liquibase:
-    change-log: classpath:/db/changelog/db.changelog-master.xml
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    parameters:
+      admin-username: ${ADMIN_USERNAME:test}
+      admin-password-hash: ${ADMIN_PASSWORD_HASH:$2a$15$3dSezSi7qDOo7QLI9AscnegxdD.N.ResBGtWq0ve4nlZc.yaanxDy}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+
+  api-docs:
+    enabled: true

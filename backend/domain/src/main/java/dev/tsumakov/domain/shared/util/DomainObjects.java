@@ -2,6 +2,7 @@ package dev.tsumakov.domain.shared.util;
 
 import dev.tsumakov.domain.shared.exception.DomainValidationException;
 import java.time.OffsetDateTime;
+import java.util.Map;
 
 public final class DomainObjects {
 
@@ -36,6 +37,17 @@ public final class DomainObjects {
 
     if (start.isAfter(end)) {
       throw new DomainValidationException("Start date can not be after end date");
+    }
+  }
+
+  public static void requireMapHasEngEntry(Map<String, String> map) {
+    if (map == null || !map.containsKey("en")) {
+      throw new DomainValidationException("Map should have \"en\" entry");
+    }
+
+    String enValue = map.get("en");
+    if (enValue == null || enValue.isBlank()) {
+      throw new DomainValidationException("English description entry (\"en\") must not be blank");
     }
   }
 }
