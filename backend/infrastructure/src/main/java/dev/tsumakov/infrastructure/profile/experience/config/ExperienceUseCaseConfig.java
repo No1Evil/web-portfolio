@@ -25,8 +25,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class ExperienceUseCaseConfig {
 
   @Bean
-  public UserExperiencePathFactory userExperiencePathFactory(UuidGenerator uuidGenerator) {
-    return new UserExperiencePathFactory(uuidGenerator);
+  public UserExperiencePathFactory userExperiencePathFactory() {
+    return new UserExperiencePathFactory();
   }
 
   @Bean

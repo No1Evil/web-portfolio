@@ -24,6 +24,6 @@ create table if not exists profile.summary
         ),
 
     constraint chk_description_has_default_lang check (
-        description ? 'en'
+        description ->> 'en' is not null
         )
 );

@@ -5,7 +5,7 @@ create schema if not exists profile;
 
 create table if not exists profile.experience_paths
 (
-    id           uuid primary key,
+    id           uuid primary key      default uuidv7(),
     title        varchar(255) not null,
     company_name varchar(255) not null,
     location     varchar(100) not null,
@@ -24,9 +24,9 @@ create table if not exists profile.experience_paths
 
     constraint chk_description_is_object check (
         jsonb_typeof(description) = 'object'
-        ),
+        )--,
 
-    constraint chk_description_en_is_array check (
-        jsonb_typeof(description -> 'en') = 'array'
-        )
+    --constraint chk_description_en_is_array check (
+    --    jsonb_typeof(description -> 'en') = 'array'
+    --    )
 )

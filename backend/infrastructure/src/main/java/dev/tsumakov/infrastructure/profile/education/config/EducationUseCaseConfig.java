@@ -25,8 +25,8 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class EducationUseCaseConfig {
 
   @Bean
-  public UserEducationPathFactory userEducationPathFactory(UuidGenerator uuidGenerator) {
-    return new UserEducationPathFactory(uuidGenerator);
+  public UserEducationPathFactory userEducationPathFactory() {
+    return new UserEducationPathFactory();
   }
 
   @Bean

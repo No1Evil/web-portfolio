@@ -2,6 +2,8 @@ package dev.tsumakov.infrastructure.profile.education.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Version;
@@ -11,7 +13,9 @@ import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.generator.EventType;
 import org.hibernate.type.SqlTypes;
 
 @Entity
@@ -22,6 +26,7 @@ import org.hibernate.type.SqlTypes;
 public class UserEducationPathEntity {
 
   @Id
+  @Generated(event = EventType.INSERT)
   private UUID id;
 
   @Column(nullable = false)

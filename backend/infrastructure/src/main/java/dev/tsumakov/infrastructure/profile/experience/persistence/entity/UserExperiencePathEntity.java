@@ -11,7 +11,9 @@ import java.util.UUID;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.generator.EventType;
 import org.hibernate.type.SqlTypes;
 
 @Entity
@@ -23,6 +25,7 @@ public class UserExperiencePathEntity {
 
 
   @Id
+  @Generated(event = EventType.INSERT)
   private UUID id;
 
   @Column(nullable = false)

@@ -46,6 +46,7 @@ public class UserEducationPathRepositoryImpl implements UserEducationPathReposit
   @Override
   public UserEducationPath create(UserEducationPath entity) {
     var entityToSave = mapper.toEntity(entity);
+    entityToSave.setId(null);
     var savedEntity = repository.save(entityToSave);
     return mapper.toDomain(savedEntity);
   }

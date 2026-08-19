@@ -5,7 +5,7 @@ create schema if not exists profile;
 
 create table if not exists profile.education_paths
 (
-    id          uuid primary key,
+    id          uuid primary key      default uuidv7(),
     title       varchar(255) not null,
     location    varchar(100) not null,
     description jsonb        not null,
@@ -30,6 +30,6 @@ create table if not exists profile.education_paths
         ),
 
     constraint chk_description_has_default_lang check (
-        description ? 'en'
+        description ->> 'en' is not null
         )
 );
