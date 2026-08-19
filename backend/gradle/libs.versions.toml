@@ -4,6 +4,7 @@ spring-boot = "4.0.6"
 spring-dependency-management = "1.1.7"
 mapstruct = "1.6.3"
 uuid-creator-ver = "6.1.1"
+openapi = "1.9.0"
 
 [libraries]
 lombok = { group = "org.projectlombok", name = "lombok", version.ref = "lombok" }
@@ -14,3 +15,4 @@ uuid-creator = { group = "com.github.f4b6a3", name = "uuid-creator", version.ref
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
+openapi = {id = "org.springdoc.openapi-gradle-plugin", version.ref = "openapi"}

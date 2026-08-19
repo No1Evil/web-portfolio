@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
+    alias(libs.plugins.openapi)
 }
 
 description = "Application layer"
@@ -29,4 +30,13 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named("forkedSpringBootRun") {
+    dependsOn(":application:jar", ":domain:jar")
+}
+
+openApi {
+    apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")
+    outputFileName.set("openapi.yaml")
 }
