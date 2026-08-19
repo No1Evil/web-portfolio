@@ -9,3 +9,9 @@ spring:
     parameters:
       admin-username: ${ADMIN_USERNAME}
       admin-password-hash: ${ADMIN_PASSWORD_HASH}
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
