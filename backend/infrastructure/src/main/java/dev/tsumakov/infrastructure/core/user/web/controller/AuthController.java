@@ -1,6 +1,7 @@
 package dev.tsumakov.infrastructure.core.user.web.controller;
 
 import dev.tsumakov.application.core.user.port.in.AuthenticateUserUseCase;
+import dev.tsumakov.application.core.user.port.in.GetCurrentUserUseCase;
 import dev.tsumakov.infrastructure.core.user.web.dto.request.AuthenticateUserRequest;
 import dev.tsumakov.infrastructure.core.user.web.dto.response.UserResponse;
 import dev.tsumakov.infrastructure.core.user.web.mapper.UserWebMapper;
@@ -18,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
   private final AuthenticateUserUseCase authenticateUserUseCase;
+  private final GetCurrentUserUseCase getCurrentUserUseCase;
   private final UserWebMapper mapper;
 
   @PostMapping("/login")
@@ -52,6 +55,14 @@ public class AuthController {
     var response = mapper.toResponse(user);
 
     return ResponseEntity.ok(response);
+  }
+
+  @GetMapping("/me")
+  @Operation(operationId = "me")
+  public ResponseEntity<UserResponse> me() {
+    var authentication = SecurityContextHolder.getContext().getAuthentication();
+    var user = getCurrentUserUseCase.execute(authentication.getName());
+    return ResponseEntity.ok(mapper.toResponse(user));
   }
 
   @PostMapping("/logout")
