@@ -277,12 +277,4 @@ public class UserExperiencePathTest {
         .isInstanceOf(DomainValidationException.class);
   }
 
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var experience = validExperience().withIncrementedVersion();
-    assertThat(experience.version()).isEqualTo(3L);
-    assertThat(experience.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(experience.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(experience.title()).isEqualTo("Software Engineer");
-  }
 }

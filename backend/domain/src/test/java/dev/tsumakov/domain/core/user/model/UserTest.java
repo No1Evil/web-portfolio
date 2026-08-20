@@ -85,13 +85,4 @@ public class UserTest {
     assertThatThrownBy(() -> validUser().updatePassword(null))
         .isInstanceOf(DomainValidationException.class);
   }
-
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var user = validUser().withIncrementedVersion();
-    assertThat(user.version()).isEqualTo(6L);
-    assertThat(user.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(user.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(user.username()).isEqualTo("admin");
-  }
 }

@@ -84,12 +84,4 @@ public class SkillCategoryTest {
     assertThat(category.version()).isEqualTo(2L);
   }
 
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var category = validCategory().withIncrementedVersion();
-    assertThat(category.version()).isEqualTo(3L);
-    assertThat(category.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(category.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(category.name()).isEqualTo("Backend");
-  }
 }

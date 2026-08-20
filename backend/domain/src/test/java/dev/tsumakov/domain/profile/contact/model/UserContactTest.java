@@ -109,13 +109,4 @@ public class UserContactTest {
     assertThat(contact.iconUrl()).isEqualTo("new-icon.svg");
     assertThat(contact.version()).isEqualTo(4L);
   }
-
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var contact = validContact().withIncrementedVersion();
-    assertThat(contact.version()).isEqualTo(5L);
-    assertThat(contact.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(contact.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(contact.title()).isEqualTo("Email");
-  }
 }

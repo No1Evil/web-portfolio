@@ -1,5 +1,6 @@
 package dev.tsumakov.domain.profile.summary.model;
 
+import dev.tsumakov.domain.core.user.exception.UserIdValidationException;
 import dev.tsumakov.domain.shared.util.DomainObjects;
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -17,6 +18,7 @@ public record UserSummary(
 ) {
 
   public UserSummary {
+    if (id != null && id != 1) throw new UserIdValidationException("User summary id should be equal to 1");
     DomainObjects.requireNotBlank(firstName, "firstName");
     DomainObjects.requireNotBlank(lastName, "lastName");
     DomainObjects.requireNotBlank(proficiency, "proficiency");

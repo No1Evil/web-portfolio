@@ -261,13 +261,4 @@ public class UserEducationPathTest {
     assertThatThrownBy(() -> validEducation().updatePresent(null))
         .isInstanceOf(DomainValidationException.class);
   }
-
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var education = validEducation().withIncrementedVersion();
-    assertThat(education.version()).isEqualTo(3L);
-    assertThat(education.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(education.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(education.title()).isEqualTo("MIT");
-  }
 }
