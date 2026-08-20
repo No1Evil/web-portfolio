@@ -118,16 +118,4 @@ public class SkillTest {
     assertThatThrownBy(() -> validSkill().updateName("  "))
         .isInstanceOf(DomainValidationException.class);
   }
-
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var skill = validSkill().withIncrementedVersion();
-    assertThat(skill.version()).isEqualTo(4L);
-    assertThat(skill.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(skill.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(skill.name()).isEqualTo("Java");
-    assertThat(skill.categoryId()).isEqualTo(2);
-    assertThat(skill.iconUrl()).isEqualTo("icon.svg");
-    assertThat(skill.id()).isEqualTo(1);
-  }
 }

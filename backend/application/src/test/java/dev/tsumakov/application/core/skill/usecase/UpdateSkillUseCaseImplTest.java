@@ -76,7 +76,7 @@ class UpdateSkillUseCaseImplTest {
     assertThat(updated.categoryId()).isEqualTo(2);
     assertThat(updated.name()).isEqualTo("Kotlin");
     assertThat(updated.iconUrl()).isEqualTo("kotlin.svg");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test
@@ -111,7 +111,7 @@ class UpdateSkillUseCaseImplTest {
     assertThat(updated.name()).isEqualTo("Kotlin");
     assertThat(updated.categoryId()).isEqualTo(1);
     assertThat(updated.iconUrl()).isEqualTo("icon.svg");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test

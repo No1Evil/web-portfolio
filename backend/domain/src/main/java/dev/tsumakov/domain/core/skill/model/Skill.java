@@ -31,8 +31,4 @@ public record Skill(
     return new Skill(id, categoryId, name, iconUrl, createdAt, updatedAt, version);
   }
 
-  public Skill withIncrementedVersion() {
-    return new Skill(id, categoryId, name, iconUrl, createdAt, OffsetDateTime.now(), version + 1);
-  }
-
 }

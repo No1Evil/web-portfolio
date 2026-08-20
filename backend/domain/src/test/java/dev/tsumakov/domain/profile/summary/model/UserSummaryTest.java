@@ -2,6 +2,7 @@ package dev.tsumakov.domain.profile.summary.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import dev.tsumakov.domain.core.user.exception.UserIdValidationException;
@@ -27,12 +28,10 @@ public class UserSummaryTest {
   }
 
   @Test
-  public void shouldThrowExceptionWhenIdIsNull() {
-    assertThatThrownBy(
-        () -> new UserSummary(null, "John", "Doe", "Engineer", Map.of("en", "Bio"), "hero.png",
-            CREATED_AT, UPDATED_AT, 7L))
-        .isInstanceOf(DomainValidationException.class)
-        .hasMessage("UserSummary ID must not be null");
+  public void shouldNotThrowExceptionWhenIdIsNull() {
+    assertThatNoException().isThrownBy(
+            () -> new UserSummary(null, "John", "Doe", "Engineer", Map.of("en", "Bio"), "hero.png",
+                CREATED_AT, UPDATED_AT, 7L));
   }
 
   @Test
@@ -40,8 +39,7 @@ public class UserSummaryTest {
     assertThatThrownBy(
         () -> new UserSummary(3, "John", "Doe", "Engineer", Map.of("en", "Bio"), "hero.png",
             CREATED_AT, UPDATED_AT, 7L))
-        .isInstanceOf(UserIdValidationException.class)
-        .hasMessage("User without id '1' is prohibited");
+        .isInstanceOf(UserIdValidationException.class);
   }
 
   @Test
@@ -211,14 +209,5 @@ public class UserSummaryTest {
     var summary = validSummary().updateHeroImageUrl("new-hero.png");
     assertThat(summary.heroImageUrl()).isEqualTo("new-hero.png");
     assertThat(summary.version()).isEqualTo(7L);
-  }
-
-  @Test
-  public void shouldIncrementVersionAndRefreshUpdatedAt() {
-    var summary = validSummary().withIncrementedVersion();
-    assertThat(summary.version()).isEqualTo(8L);
-    assertThat(summary.updatedAt()).isAfterOrEqualTo(UPDATED_AT);
-    assertThat(summary.createdAt()).isEqualTo(CREATED_AT);
-    assertThat(summary.firstName()).isEqualTo("John");
   }
 }

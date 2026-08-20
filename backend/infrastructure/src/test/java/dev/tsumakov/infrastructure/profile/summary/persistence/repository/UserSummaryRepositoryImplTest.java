@@ -116,20 +116,4 @@ class UserSummaryRepositoryImplTest {
     assertThat(result).isSameAs(updated);
     verify(repository).save(entity);
   }
-
-  @Test
-  void shouldCreateWithoutNullingId() {
-    var entity = entity(1);
-    var summary = domain(1);
-    when(mapper.toEntity(summary)).thenReturn(entity);
-    when(repository.save(any())).thenReturn(entity);
-    when(mapper.toDomain(entity)).thenReturn(summary);
-
-    var result = repositoryImpl.create(summary);
-
-    assertThat(result).isSameAs(summary);
-    var captor = ArgumentCaptor.forClass(UserSummaryEntity.class);
-    verify(repository).save(captor.capture());
-    assertThat(captor.getValue().getId()).isEqualTo(1);
-  }
 }

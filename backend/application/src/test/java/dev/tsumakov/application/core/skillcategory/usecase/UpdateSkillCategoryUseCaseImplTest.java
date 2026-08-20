@@ -59,7 +59,7 @@ class UpdateSkillCategoryUseCaseImplTest {
   void shouldUpdateAllProvidedFieldsWithIncrementedVersion() {
     var command = new UpdateSkillCategoryDto(1, "Frontend", "new-icon.svg");
     var current = currentCategory();
-    var saved = new SkillCategory(1, "Frontend", "new-icon.svg", 3L, NOW, NOW);
+    var saved = new SkillCategory(1, "Frontend", "new-icon.svg", 2L, NOW, NOW);
     var expectedDto = new SkillCategoryDto(1, "Frontend", "new-icon.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(current));
@@ -75,7 +75,7 @@ class UpdateSkillCategoryUseCaseImplTest {
     var updated = captor.getValue();
     assertThat(updated.name()).isEqualTo("Frontend");
     assertThat(updated.iconUrl()).isEqualTo("new-icon.svg");
-    assertThat(updated.version()).isEqualTo(3L);
+    assertThat(updated.version()).isEqualTo(2L);
     assertThat(updated.id()).isEqualTo(1);
     assertThat(updated.createdAt()).isEqualTo(NOW);
   }
@@ -111,7 +111,7 @@ class UpdateSkillCategoryUseCaseImplTest {
     var updated = captor.getValue();
     assertThat(updated.name()).isEqualTo("Frontend");
     assertThat(updated.iconUrl()).isEqualTo("icon.svg");
-    assertThat(updated.version()).isEqualTo(3L);
+    assertThat(updated.version()).isEqualTo(2L);
   }
 
   @Test

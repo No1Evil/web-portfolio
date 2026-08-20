@@ -18,7 +18,7 @@ public record UserSummary(
 ) {
 
   public UserSummary {
-    validateUserSummaryId(id);
+    if (id != null && id != 1) throw new UserIdValidationException("User summary id should be equal to 1");
     DomainObjects.requireNotBlank(firstName, "firstName");
     DomainObjects.requireNotBlank(lastName, "lastName");
     DomainObjects.requireNotBlank(proficiency, "proficiency");
@@ -53,15 +53,4 @@ public record UserSummary(
         createdAt, updatedAt, version);
   }
 
-  public UserSummary withIncrementedVersion() {
-    return new UserSummary(id, firstName, lastName, proficiency, description, heroImageUrl,
-        createdAt, OffsetDateTime.now(), version + 1);
-  }
-
-  private void validateUserSummaryId(Integer id) {
-    DomainObjects.requireNonNull(id, "UserSummary ID must not be null");
-    if (!id.equals(1)) {
-      throw new UserIdValidationException("User without id '1' is prohibited");
-    }
-  }
 }

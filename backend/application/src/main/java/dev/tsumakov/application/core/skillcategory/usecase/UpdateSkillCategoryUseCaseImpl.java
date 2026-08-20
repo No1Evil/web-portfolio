@@ -28,7 +28,7 @@ public class UpdateSkillCategoryUseCaseImpl implements UpdateSkillCategoryUseCas
     updatedCategory = updateIconUrl(updatedCategory, command.iconUrl());
 
     if (!currentCategory.equals(updatedCategory)) {
-      var savedCategory = repository.update(updatedCategory.withIncrementedVersion());
+      var savedCategory = repository.update(updatedCategory);
       return mapper.toDto(savedCategory);
     }
 

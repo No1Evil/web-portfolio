@@ -58,7 +58,7 @@ class UpdateUserContactUseCaseImplTest {
   @Test
   void shouldUpdateAllProvidedFieldsWithIncrementedVersion() {
     var command = new UpdateUserContactDto(1, "GitHub", "https://github.com", "github.svg");
-    var saved = new UserContact(1, "GitHub", "https://github.com", "github.svg", NOW, NOW, 4L);
+    var saved = new UserContact(1, "GitHub", "https://github.com", "github.svg", NOW, NOW, 3L);
     var expectedDto = new UserContactDto(1, "GitHub", "https://github.com", "github.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(currentContact()));
@@ -75,7 +75,7 @@ class UpdateUserContactUseCaseImplTest {
     assertThat(updated.title()).isEqualTo("GitHub");
     assertThat(updated.redirectUrl()).isEqualTo("https://github.com");
     assertThat(updated.iconUrl()).isEqualTo("github.svg");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test
@@ -110,7 +110,7 @@ class UpdateUserContactUseCaseImplTest {
     assertThat(updated.title()).isEqualTo("LinkedIn");
     assertThat(updated.redirectUrl()).isEqualTo("mailto:a@b.c");
     assertThat(updated.iconUrl()).isEqualTo("mail.svg");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test

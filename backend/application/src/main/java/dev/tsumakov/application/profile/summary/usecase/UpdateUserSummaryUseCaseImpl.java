@@ -31,7 +31,7 @@ public class UpdateUserSummaryUseCaseImpl implements UpdateUserSummaryUseCase {
     updated = updateHeroImageUrl(updated, command.heroImageUrl());
 
     if (!currentUserSummary.equals(updated)) {
-      var saved = repository.update(updated.withIncrementedVersion());
+      var saved = repository.update(updated);
       return mapper.toDto(saved);
     }
 

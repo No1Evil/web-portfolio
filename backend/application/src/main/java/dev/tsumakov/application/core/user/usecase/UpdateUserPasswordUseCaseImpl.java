@@ -32,7 +32,7 @@ public class UpdateUserPasswordUseCaseImpl implements UpdateUserPasswordUseCase 
     String hashedPassword = passwordEncoder.encodePassword(command.rawPassword());
     User updatedUser = user.updatePassword(hashedPassword);
 
-    User savedUser = repository.update(updatedUser.withIncrementedVersion());
+    User savedUser = repository.update(updatedUser);
 
     return mapper.toDto(savedUser);
   }

@@ -14,6 +14,7 @@ import dev.tsumakov.application.core.user.dto.in.AuthenticateUserDto;
 import dev.tsumakov.application.core.user.dto.outer.UserDto;
 import dev.tsumakov.application.core.user.exception.InvalidCredentialsException;
 import dev.tsumakov.application.core.user.port.in.AuthenticateUserUseCase;
+import dev.tsumakov.application.core.user.port.in.GetCurrentUserUseCase;
 import dev.tsumakov.infrastructure.core.user.web.config.UserExceptionHandler;
 import dev.tsumakov.infrastructure.core.user.web.dto.request.AuthenticateUserRequest;
 import dev.tsumakov.infrastructure.core.user.web.dto.response.UserResponse;
@@ -43,6 +44,8 @@ class AuthControllerTest {
   @Mock
   private AuthenticateUserUseCase authenticateUserUseCase;
   @Mock
+  private GetCurrentUserUseCase getCurrentUserUseCase;
+  @Mock
   private UserWebMapper mapper;
 
   private MockMvc mockMvc;
@@ -52,7 +55,7 @@ class AuthControllerTest {
   @BeforeEach
   void setUp() {
     mockMvc = MockMvcBuilders
-        .standaloneSetup(new AuthController(authenticateUserUseCase, mapper))
+        .standaloneSetup(new AuthController(authenticateUserUseCase, getCurrentUserUseCase, mapper))
         .setControllerAdvice(new UserExceptionHandler(), new RestExceptionHandler())
         .build();
   }
