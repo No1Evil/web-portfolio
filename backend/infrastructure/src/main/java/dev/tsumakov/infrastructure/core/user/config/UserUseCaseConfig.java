@@ -2,8 +2,10 @@ package dev.tsumakov.infrastructure.core.user.config;
 
 import dev.tsumakov.application.core.user.mapper.UserDtoMapper;
 import dev.tsumakov.application.core.user.port.in.AuthenticateUserUseCase;
+import dev.tsumakov.application.core.user.port.in.GetCurrentUserUseCase;
 import dev.tsumakov.application.core.user.port.in.UpdateUserPasswordUseCase;
 import dev.tsumakov.application.core.user.usecase.AuthenticateUserUseCaseImpl;
+import dev.tsumakov.application.core.user.usecase.GetCurrentUserUseCaseImpl;
 import dev.tsumakov.application.core.user.usecase.UpdateUserPasswordUseCaseImpl;
 import dev.tsumakov.domain.core.user.repository.UserRepository;
 import dev.tsumakov.domain.shared.util.PasswordEncoder;
@@ -32,6 +34,11 @@ public class UserUseCaseConfig {
   public AuthenticateUserUseCase authenticateUserUseCase(UserRepository repository,
       PasswordEncoder passwordEncoder, UserDtoMapper mapper) {
     return new AuthenticateUserUseCaseImpl(repository, passwordEncoder, mapper);
+  }
+
+  @Bean
+  public GetCurrentUserUseCase getCurrentUserUseCase(UserRepository repository, UserDtoMapper mapper) {
+    return new GetCurrentUserUseCaseImpl(repository, mapper);
   }
 
 }
