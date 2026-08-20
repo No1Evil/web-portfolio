@@ -45,6 +45,8 @@ public class UserSummaryRepositoryImpl implements UserSummaryRepository {
   @Override
   public UserSummary create(UserSummary entity) {
     var entityToSave = mapper.toEntity(entity);
+    entityToSave.setId(null);
+
     var savedEntity = repository.save(entityToSave);
     return mapper.toDomain(savedEntity);
   }

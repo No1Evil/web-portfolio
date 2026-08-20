@@ -1,5 +1,6 @@
 package dev.tsumakov.infrastructure.profile.summary.web.config;
 
+import dev.tsumakov.application.profile.summary.exception.UserSummaryAlreadyExistsException;
 import dev.tsumakov.application.profile.summary.exception.UserSummaryNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,6 +17,15 @@ public class UserSummaryExceptionHandler {
     var detail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
     detail.setTitle("User Summary Not Found");
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(detail);
+  }
+
+  @ExceptionHandler(UserSummaryAlreadyExistsException.class)
+  public ResponseEntity<ProblemDetail> handleUserSummaryAlreadyExists(UserSummaryAlreadyExistsException e) {
+    var detail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+    detail.setTitle("User Summary Already Exists");
+    return ResponseEntity.status(HttpStatus.CONFLICT)
         .contentType(MediaType.APPLICATION_PROBLEM_JSON)
         .body(detail);
   }
