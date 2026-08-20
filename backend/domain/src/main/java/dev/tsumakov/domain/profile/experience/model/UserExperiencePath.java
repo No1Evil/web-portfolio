@@ -69,11 +69,6 @@ public record UserExperiencePath(
         present, createdAt, updatedAt, version);
   }
 
-  public UserExperiencePath withIncrementedVersion() {
-    return new UserExperiencePath(id, title, companyName, location, description, startDate, endDate,
-        present, createdAt, OffsetDateTime.now(), version + 1);
-  }
-
   private void validateDates(OffsetDateTime startDate, OffsetDateTime endDate) {
     if (startDate != null && endDate != null) {
       DomainObjects.requireValidDates(startDate, endDate);

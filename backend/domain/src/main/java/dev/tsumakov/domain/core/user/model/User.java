@@ -23,10 +23,6 @@ public record User(
     return new User(id, username, passwordHash, createdAt, updatedAt, version);
   }
 
-  public User withIncrementedVersion() {
-    return new User(id, username, passwordHash, createdAt, OffsetDateTime.now(), version + 1);
-  }
-
   private void validateUserId(Integer id) {
     DomainObjects.requireNonNull(id, "User ID must not be null");
     if (!id.equals(1)) {

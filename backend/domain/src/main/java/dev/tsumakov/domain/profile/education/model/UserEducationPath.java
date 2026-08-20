@@ -62,11 +62,6 @@ public record UserEducationPath(
         present, createdAt, updatedAt, version);
   }
 
-  public UserEducationPath withIncrementedVersion() {
-    return new UserEducationPath(id, title, location, description, startDate, endDate,
-        present, createdAt, OffsetDateTime.now(), version + 1);
-  }
-
   private void validateDates(OffsetDateTime startDate, OffsetDateTime endDate) {
     if (startDate != null && endDate != null) {
       DomainObjects.requireValidDates(startDate, endDate);

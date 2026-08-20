@@ -1,6 +1,5 @@
 package dev.tsumakov.domain.profile.summary.model;
 
-import dev.tsumakov.domain.core.user.exception.UserIdValidationException;
 import dev.tsumakov.domain.shared.util.DomainObjects;
 import java.time.OffsetDateTime;
 import java.util.Map;
@@ -18,7 +17,6 @@ public record UserSummary(
 ) {
 
   public UserSummary {
-    validateUserSummaryId(id);
     DomainObjects.requireNotBlank(firstName, "firstName");
     DomainObjects.requireNotBlank(lastName, "lastName");
     DomainObjects.requireNotBlank(proficiency, "proficiency");
@@ -53,15 +51,4 @@ public record UserSummary(
         createdAt, updatedAt, version);
   }
 
-  public UserSummary withIncrementedVersion() {
-    return new UserSummary(id, firstName, lastName, proficiency, description, heroImageUrl,
-        createdAt, OffsetDateTime.now(), version + 1);
-  }
-
-  private void validateUserSummaryId(Integer id) {
-    DomainObjects.requireNonNull(id, "UserSummary ID must not be null");
-    if (!id.equals(1)) {
-      throw new UserIdValidationException("User without id '1' is prohibited");
-    }
-  }
 }

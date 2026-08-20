@@ -24,8 +24,4 @@ public record SkillCategory(
     return new SkillCategory(id, name, iconUrl, version, createdAt, updatedAt);
   }
 
-  public SkillCategory withIncrementedVersion() {
-    return new SkillCategory(id, name, iconUrl, version + 1, createdAt, OffsetDateTime.now());
-  }
-
 }

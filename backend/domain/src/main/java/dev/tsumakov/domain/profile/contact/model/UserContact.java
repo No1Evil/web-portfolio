@@ -29,8 +29,4 @@ public record UserContact(
     return new UserContact(id, title, redirectUrl, iconUrl, createdAt, updatedAt, version);
   }
 
-  public UserContact withIncrementedVersion() {
-    return new UserContact(id, title, redirectUrl, iconUrl, createdAt, OffsetDateTime.now(), version + 1);
-  }
-
 }
