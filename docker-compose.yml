@@ -4,7 +4,7 @@ services:
     container_name: web-portfolio-database
     restart: always
     env_file:
-      - './backend/.env.test'
+      - './backend/.test.env'
     ports:
       - "5432:5432"
     volumes:
@@ -20,7 +20,7 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - './backend/.env.test'
+      - './backend/.test.env'
 
 volumes:
   pg-data:
