@@ -1,0 +1,10 @@
+package dev.tsumakov.application.profile.summary.port.in;
+
+import dev.tsumakov.application.profile.summary.dto.in.CreateUserSummaryDto;
+import dev.tsumakov.application.profile.summary.dto.outer.UserSummaryDto;
+
+public interface CreateUserSummaryUseCase {
+
+  UserSummaryDto execute(CreateUserSummaryDto command);
+
+}

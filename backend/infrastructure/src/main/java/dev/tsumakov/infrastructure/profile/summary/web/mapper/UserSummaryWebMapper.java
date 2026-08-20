@@ -1,7 +1,9 @@
 package dev.tsumakov.infrastructure.profile.summary.web.mapper;
 
+import dev.tsumakov.application.profile.summary.dto.in.CreateUserSummaryDto;
 import dev.tsumakov.application.profile.summary.dto.in.UpdateUserSummaryDto;
 import dev.tsumakov.application.profile.summary.dto.outer.UserSummaryDto;
+import dev.tsumakov.infrastructure.profile.summary.web.dto.request.CreateUserSummaryRequest;
 import dev.tsumakov.infrastructure.profile.summary.web.dto.request.UpdateUserSummaryRequest;
 import dev.tsumakov.infrastructure.profile.summary.web.dto.response.UserSummaryAdminResponse;
 import dev.tsumakov.infrastructure.profile.summary.web.dto.response.UserSummaryResponse;
@@ -15,6 +17,8 @@ public interface UserSummaryWebMapper {
   @Mapping(target = "createdAt", ignore = true)
   @Mapping(target = "updatedAt", ignore = true)
   UpdateUserSummaryDto toDto(UpdateUserSummaryRequest request);
+
+  CreateUserSummaryDto toDto(CreateUserSummaryRequest request);
 
   UserSummaryAdminResponse toAdminResponse(UserSummaryDto dto);
 
