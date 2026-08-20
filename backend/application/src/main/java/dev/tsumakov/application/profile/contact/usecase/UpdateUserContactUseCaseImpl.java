@@ -29,7 +29,7 @@ public class UpdateUserContactUseCaseImpl implements UpdateUserContactUseCase {
     updatedContact = updateIconUrl(updatedContact, command.iconUrl());
 
     if (!currentContact.equals(updatedContact)) {
-      var savedContact = repository.update(updatedContact.withIncrementedVersion());
+      var savedContact = repository.update(updatedContact);
       return mapper.toDto(savedContact);
     }
 

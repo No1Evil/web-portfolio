@@ -35,7 +35,7 @@ public class UpdateUserExperiencePathUseCaseImpl implements UpdateUserExperience
     updated = updatePresent(updated, command.present());
 
     if (!currentExperiencePath.equals(updated)) {
-      var saved = repository.update(updated.withIncrementedVersion());
+      var saved = repository.update(updated);
       return mapper.toDto(saved);
     }
 

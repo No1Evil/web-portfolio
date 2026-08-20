@@ -28,7 +28,7 @@ public class UpdateSkillUseCaseImpl implements UpdateSkillUseCase {
     updatedSkill = updateIconUrl(updatedSkill, command.iconUrl());
 
     if (!currentSkill.equals(updatedSkill)) {
-      Skill savedSkill = skillRepository.update(updatedSkill.withIncrementedVersion());
+      Skill savedSkill = skillRepository.update(updatedSkill);
       return mapper.toDto(savedSkill);
     }
 
