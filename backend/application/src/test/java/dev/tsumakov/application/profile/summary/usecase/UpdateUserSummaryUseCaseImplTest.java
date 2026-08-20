@@ -60,7 +60,7 @@ class UpdateUserSummaryUseCaseImplTest {
   @Test
   void shouldUpdateAllProvidedFieldsWithIncrementedVersion() {
     var command = new UpdateUserSummaryDto("Jane", "Smith", "Lead", Map.of("en", "New bio"), "new-hero.svg", null, null);
-    var saved = new UserSummary(1, "Jane", "Smith", "Lead", Map.of("en", "New bio"), "new-hero.svg", NOW, NOW, 4L);
+    var saved = new UserSummary(1, "Jane", "Smith", "Lead", Map.of("en", "New bio"), "new-hero.svg", NOW, NOW, 3L);
     var expectedDto = new UserSummaryDto(1, "Jane", "Smith", "Lead", Map.of("en", "New bio"), "new-hero.svg", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(currentSummary()));
@@ -79,7 +79,7 @@ class UpdateUserSummaryUseCaseImplTest {
     assertThat(updated.proficiency()).isEqualTo("Lead");
     assertThat(updated.description()).isEqualTo(Map.of("en", "New bio"));
     assertThat(updated.heroImageUrl()).isEqualTo("new-hero.svg");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test
@@ -114,7 +114,7 @@ class UpdateUserSummaryUseCaseImplTest {
     assertThat(updated.firstName()).isEqualTo("John");
     assertThat(updated.lastName()).isEqualTo("Smith");
     assertThat(updated.proficiency()).isEqualTo("Senior");
-    assertThat(updated.version()).isEqualTo(4L);
+    assertThat(updated.version()).isEqualTo(3L);
   }
 
   @Test

@@ -50,7 +50,7 @@ class UpdateUserPasswordUseCaseImplTest {
   @Test
   void shouldUpdatePasswordWhenOldPasswordMatches() {
     var command = new UpdateUserPasswordDto(1, "oldPass", "newPass");
-    var saved = new User(1, "admin", "$2a$10$newHash", NOW, NOW, 5L);
+    var saved = new User(1, "admin", "$2a$10$newHash", NOW, NOW, 4L);
     var expectedDto = new UserDto(1, "admin", NOW, NOW);
 
     when(repository.findById(1)).thenReturn(Optional.of(currentUser()));
@@ -69,7 +69,7 @@ class UpdateUserPasswordUseCaseImplTest {
     verify(repository).update(captor.capture());
     var updated = captor.getValue();
     assertThat(updated.passwordHash()).isEqualTo("$2a$10$newHash");
-    assertThat(updated.version()).isEqualTo(5L);
+    assertThat(updated.version()).isEqualTo(4L);
     assertThat(updated.username()).isEqualTo("admin");
   }
 
