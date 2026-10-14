@@ -1,0 +1,51 @@
+name: Coverage badge
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/coverage-badge.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: coverage-badge-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  badge:
+    name: Update coverage badge
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up backend environment
+        uses: ./.github/actions/setup-backend
+
+      - name: Run tests
+        run: |
+          chmod +x gradlew
+          ./gradlew test jacocoTestReport --console=plain
+
+      - name: Generate JaCoCo badge
+        uses: cicirello/jacoco-badge-generator@v2
+        with:
+          jacoco-csv-file: '**/jacocoTestReport.csv'
+          generate-branches-badge: true
+
+      - name: Commit coverage badge
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: 'chore: update JaCoCo coverage badge'
+          branch: badges
+          create_branch: true
+          push_options: '--force'
+          file_pattern: .github/badges/*.svg
