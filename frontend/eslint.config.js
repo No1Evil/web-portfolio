@@ -6,6 +6,10 @@ const angular = require('angular-eslint');
 
 module.exports = defineConfig([
   {
+    // Generated API client (ng-openapi) and build output are not linted.
+    ignores: ['src/api/**', 'dist/**'],
+  },
+  {
     files: ['**/*.ts'],
     extends: [
       eslint.configs.recommended,
