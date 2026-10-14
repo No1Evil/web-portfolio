@@ -1,0 +1,115 @@
+<div class="skills">
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['skills']['addSkill'] }}</h2>
+    </div>
+    <form class="skills__form" (ngSubmit)="add()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['skills']['category'] }}</span>
+        <select
+          class="field__select"
+          [ngModel]="categoryId() ?? ''"
+          name="category"
+          (ngModelChange)="categoryId.set(parseCategory($event))"
+        >
+          @for (category of categoryList(); track category.id) {
+            <option [value]="category.id">{{ category.name }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['skills']['name'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="name()"
+          name="name"
+          [placeholder]="dict()['admin']['skills']['placeholderName']"
+          (ngModelChange)="name.set($event)"
+        />
+      </label>
+      <div class="skills__form-actions">
+        <button type="submit" class="skills__submit">
+          {{ editing() ? dict()['admin']['save'] : dict()['admin']['add'] }}
+        </button>
+        @if (editing()) {
+          <button type="button" class="skills__cancel" (click)="cancelEdit()">{{ dict()['admin']['cancel'] }}</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['skills']['categories'] }}</h2>
+    </div>
+    <form class="skills__form" (ngSubmit)="saveCategory()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['skills']['category'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="categoryName()"
+          name="categoryName"
+          [placeholder]="dict()['admin']['skills']['placeholderCategoryName']"
+          (ngModelChange)="categoryName.set($event)"
+        />
+      </label>
+      <div class="skills__form-actions">
+        <button type="submit" class="skills__submit">
+          {{ editingCategory() ? dict()['admin']['save'] : dict()['admin']['add'] }}
+        </button>
+        @if (editingCategory()) {
+          <button type="button" class="skills__cancel" (click)="cancelEditCategory()">{{ dict()['admin']['cancel'] }}</button>
+        }
+      </div>
+    </form>
+    @if (categoryList().length > 0) {
+      <ul class="skills__list">
+        @for (category of categoryList(); track trackCategory($index, category)) {
+          <li class="skills__row">
+            <span class="skills__name">{{ category.name }}</span>
+            <div class="skills__row-actions">
+              <button type="button" class="skills__action" (click)="startEditCategory(category)">
+                {{ dict()['admin']['edit'] }}
+              </button>
+              <button type="button" class="skills__action skills__action--danger" (click)="removeCategory(category)">
+                {{ dict()['admin']['delete'] }}
+              </button>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="status">{{ dict()['admin']['empty'] }}</p>
+    }
+  </section>
+
+  @for (group of groupList(); track group.category.id) {
+    <section class="card">
+      <div class="card__head">
+        <h2 class="card__title">{{ group.category.name }}</h2>
+        <span class="skills__count">{{ group.skills.length }}</span>
+      </div>
+      @if (group.skills.length > 0) {
+        <ul class="skills__list">
+          @for (skill of group.skills; track trackSkill($index, skill)) {
+            <li class="skills__row">
+              <span class="skills__name">{{ skill.name }}</span>
+              <div class="skills__row-actions">
+                <button type="button" class="skills__action" (click)="startEdit(skill)">
+                  {{ dict()['admin']['edit'] }}
+                </button>
+                <button type="button" class="skills__action skills__action--danger" (click)="remove(skill)">
+                  {{ dict()['admin']['delete'] }}
+                </button>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <p class="status">{{ dict()['admin']['empty'] }}</p>
+      }
+    </section>
+  }
+</div>

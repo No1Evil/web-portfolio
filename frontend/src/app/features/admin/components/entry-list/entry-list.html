@@ -1,0 +1,27 @@
+@if (rows().length > 0) {
+  <ul class="entry-list">
+    @for (row of rows(); track row.id) {
+      <li class="entry-list__row">
+        <div class="entry-list__text">
+          <span class="entry-list__title">{{ row.title }}</span>
+          @if (row.subtitle) {
+            <span class="entry-list__subtitle">{{ row.subtitle }}</span>
+          }
+        </div>
+        <div class="entry-list__actions">
+          @if (row.meta) {
+            <span class="entry-list__meta">{{ row.meta }}</span>
+          }
+          <button type="button" class="entry-list__action" (click)="edit.emit(row)">
+            {{ dict()['admin']['edit'] }}
+          </button>
+          <button type="button" class="entry-list__action entry-list__action--danger" (click)="delete.emit(row)">
+            {{ dict()['admin']['delete'] }}
+          </button>
+        </div>
+      </li>
+    }
+  </ul>
+} @else {
+  <p class="status">{{ dict()['admin']['empty'] }}</p>
+}

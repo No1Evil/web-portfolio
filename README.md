@@ -69,7 +69,7 @@ Project build with Clean Architecture in mind.
 
 ## Preview
 
-![image/TODO.png]
+![Home Page Preview](docs/frontend/home_preview.svg)
 
 ## Author
 

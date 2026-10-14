@@ -1,0 +1,17 @@
+<aside class="sidebar">
+  <div class="sidebar__brand">
+    <span class="sidebar__logo">ft.</span>
+    <span class="sidebar__crumb">{{ crumb()['admin']['crumb'] }}</span>
+  </div>
+  <nav class="sidebar__nav">
+    @for (item of items; track item.key) {
+      <a
+        class="sidebar__item"
+        routerLink="/admin/{{ item.path }}"
+        routerLinkActive="sidebar__item--active"
+      >
+        {{ dict()['admin']['nav'][item.key] }}
+      </a>
+    }
+  </nav>
+</aside>

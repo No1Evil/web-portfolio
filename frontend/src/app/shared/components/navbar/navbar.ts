@@ -1,28 +1,28 @@
-import { Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { LayoutService } from '../../../core/services/layout/layout-service';
-import { LanguageService } from '../../../core/services/language/language-service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {
-  faUser,
-  faCode,
-  faProjectDiagram,
-  faEnvelope
-} from '@fortawesome/free-solid-svg-icons';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { I18nService } from '@core/i18n/i18n.service';
+import { LanguageSwitcher } from '../language-switcher/language-switcher';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, CommonModule, FontAwesomeModule],
+  imports: [RouterLink, RouterLinkActive, LanguageSwitcher],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  styleUrl: './navbar.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Navbar {
-  layoutService = inject(LayoutService);
-  langService = inject(LanguageService);
+  private readonly i18n = inject(I18nService);
 
-  faUser = faUser;
-  faCode = faCode;
-  faProjectDiagram = faProjectDiagram;
-  faEnvelope = faEnvelope;
+  protected readonly dict = this.i18n.dictionary;
+
+  protected readonly links = computed(() => {
+    const nav = this.dict().nav;
+    return [
+      { path: '/', label: nav.home },
+      { path: '/projects', label: nav.projects },
+      { path: '/experience', label: nav.experience },
+      { path: '/education', label: nav.education },
+      { path: '/contact', label: nav.contact },
+    ];
+  });
 }

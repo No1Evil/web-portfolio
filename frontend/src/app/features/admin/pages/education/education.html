@@ -1,0 +1,70 @@
+<div class="education">
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">
+        {{ editingId() ? dict()['admin']['edit'] : dict()['admin']['education']['addEntry'] }}
+      </h2>
+    </div>
+    <form class="education__form" (ngSubmit)="submit()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['education']['degree'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="degree()"
+          name="degree"
+          [placeholder]="dict()['admin']['education']['placeholderDegree']"
+          (ngModelChange)="degree.set($event)"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['education']['institution'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="institution()"
+          name="institution"
+          [placeholder]="dict()['admin']['education']['placeholderInstitution']"
+          (ngModelChange)="institution.set($event)"
+        />
+      </label>
+      <div class="education__dates">
+        <label class="field">
+          <span class="field__label">{{ dict()['admin']['experience']['period'] }}</span>
+          <input class="field__input" type="date" [ngModel]="startDate()" name="startDate" (ngModelChange)="startDate.set($event)" />
+        </label>
+        <label class="field">
+          <span class="field__label">&nbsp;</span>
+          <input class="field__input" type="date" [ngModel]="endDate()" name="endDate" [disabled]="present()" (ngModelChange)="endDate.set($event)" />
+        </label>
+      </div>
+      <label class="education__present">
+        <input type="checkbox" [ngModel]="present()" name="present" (ngModelChange)="present.set($event)" />
+        <span>{{ dict()['admin']['present'] }}</span>
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['experience']['description'] }}</span>
+        <textarea
+          class="field__textarea"
+          [ngModel]="description()"
+          name="description"
+          (ngModelChange)="onDescriptionChange($event)"
+        ></textarea>
+      </label>
+      <div class="education__form-actions">
+        <button type="submit" class="education__submit">{{ dict()['admin']['save'] }}</button>
+        @if (editingId()) {
+          <button type="button" class="education__cancel" (click)="cancel()">{{ dict()['admin']['cancel'] }}</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['nav']['education'] }}</h2>
+      <button type="button" class="education__add" (click)="startAdd()">+</button>
+    </div>
+    <app-admin-entry-list [rows]="rows()" (edit)="editFromRow($event)" (delete)="remove($event)" />
+  </section>
+</div>

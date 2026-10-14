@@ -1,0 +1,17 @@
+<div class="stack-group">
+  <h3 class="stack-group__title">{{ title() }}</h3>
+  <div class="stack-group__tiles">
+    @for (skill of group().skills; track skill.id) {
+      <div class="stack-group__tile">
+        <div class="stack-group__icon">
+          @if (hasIcon(skill)) {
+            <img [src]="skill.iconUrl" [alt]="skill.name" />
+          } @else {
+            <span>{{ skill.name?.[0] ?? '' }}</span>
+          }
+        </div>
+        <span class="stack-group__label">{{ skill.name }}</span>
+      </div>
+    }
+  </div>
+</div>

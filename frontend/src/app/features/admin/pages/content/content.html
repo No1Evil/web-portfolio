@@ -1,0 +1,59 @@
+<div class="content">
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['content']['profile'] }}</h2>
+    </div>
+    <form class="content__form" (ngSubmit)="submit()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['content']['firstName'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="firstName()"
+          name="firstName"
+          (ngModelChange)="firstName.set($event)"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['content']['lastName'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="lastName()"
+          name="lastName"
+          (ngModelChange)="lastName.set($event)"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['content']['role'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="role()"
+          name="role"
+          (ngModelChange)="role.set($event)"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['content']['description'] }}</span>
+        <textarea
+          class="field__textarea"
+          [ngModel]="description()"
+          name="description"
+          (ngModelChange)="onDescriptionChange($event)"
+        ></textarea>
+      </label>
+      <button type="submit" class="content__save">{{ dict()['admin']['save'] }}</button>
+    </form>
+    @if (saved()) {
+      <p class="content__saved">{{ dict()['admin']['content']['lastSaved'].replace('{time}', 'now') }}</p>
+    }
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['content']['publishing'] }}</h2>
+    </div>
+    <p class="content__publish-info">{{ dict()['admin']['content']['publishInfo'] }}</p>
+  </section>
+</div>

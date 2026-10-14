@@ -1,0 +1,37 @@
+<div class="lang-switcher">
+  <button
+    type="button"
+    class="lang-switcher__button"
+    (click)="toggle()"
+    [attr.aria-expanded]="open()"
+    aria-haspopup="listbox"
+  >
+    {{ localeCode() }}
+  </button>
+
+  @if (open()) {
+    <button type="button" class="lang-switcher__backdrop" aria-label="Close" (click)="close()"></button>
+    <div
+      class="lang-switcher__panel"
+      role="listbox"
+      aria-label="Language"
+      tabindex="-1"
+      (keydown.escape)="close()"
+    >
+      <p class="lang-switcher__header">{{ dict().lang.header }}</p>
+      @for (option of locales; track option.code) {
+        <button
+          type="button"
+          class="lang-switcher__option"
+          [class.lang-switcher__option--active]="option.code === locale()"
+          (click)="select(option.code)"
+          role="option"
+          [attr.aria-selected]="option.code === locale()"
+        >
+          <span>{{ option.label }}</span>
+          <span class="lang-switcher__code">{{ option.code }}</span>
+        </button>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,32 @@
+<section class="hero container">
+  @let heroState = hero();
+  @if (heroState.status === 'resolved') {
+    <p class="hero__caption">{{ heroState.value.proficiency }}</p>
+    <h1 class="hero__name">{{ fullName() }}</h1>
+    <p class="hero__intro">{{ description() }}</p>
+    <div class="hero__actions">
+      <a routerLink="/projects" class="btn btn--primary">{{ dict().hero.ctaProjects }}</a>
+      <a routerLink="/contact" class="btn btn--ghost">{{ dict().hero.ctaContact }}</a>
+    </div>
+  } @else if (heroState.status === 'loading') {
+    <p class="hero__status">{{ dict().hero.loading }}</p>
+  } @else {
+    <p class="hero__status">{{ dict().hero.empty }}</p>
+  }
+</section>
+
+<section class="stack container">
+  <h2 class="stack__heading">{{ dict().stack.heading }}</h2>
+  @let stackState = stack();
+  @if (stackState.status === 'resolved') {
+    <div class="stack__grid">
+      @for (group of stackState.value; track group.category.id) {
+        <app-tech-stack-group [group]="group" />
+      }
+    </div>
+  } @else if (stackState.status === 'loading') {
+    <p class="stack__status">{{ dict().stack.loading }}</p>
+  } @else {
+    <p class="stack__status">{{ dict().stack.empty }}</p>
+  }
+</section>

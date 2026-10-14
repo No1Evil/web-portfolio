@@ -1,0 +1,22 @@
+<div class="overview">
+  <section class="card overview__stats">
+    @for (stat of stats(); track stat.label) {
+      <app-admin-stat-card [label]="stat.label" [value]="stat.value" />
+    }
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['overview']['quickActions'] }}</h2>
+    </div>
+    <div class="overview__actions">
+      @for (action of quickActions; track action.path) {
+        <a class="overview__action" routerLink="{{ action.path }}">{{ action.label }}</a>
+      }
+    </div>
+  </section>
+
+  <section class="card overview__publish">
+    <p class="overview__publish-text">{{ dict()['admin']['overview']['publishInfo'] }}</p>
+  </section>
+</div>

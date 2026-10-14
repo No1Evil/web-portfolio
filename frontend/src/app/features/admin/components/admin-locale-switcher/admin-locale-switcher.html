@@ -1,0 +1,13 @@
+<div class="admin-locale" role="group" aria-label="Editing language">
+  @for (option of locales; track option.code) {
+    <button
+      type="button"
+      class="admin-locale__option"
+      [class.admin-locale__option--active]="option.code === editingLocale()"
+      (click)="select(option.code)"
+      [attr.aria-pressed]="option.code === editingLocale()"
+    >
+      {{ option.label }}
+    </button>
+  }
+</div>

@@ -1,0 +1,39 @@
+<main class="login">
+  <a class="login__back" routerLink="/">← {{ dict()['admin']['viewSite'] }}</a>
+  <div class="login__card">
+    <span class="login__logo">ft.</span>
+    <h1 class="login__title">{{ dict()['admin']['login']['title'] }}</h1>
+    <form class="login__form" (ngSubmit)="submit()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['login']['username'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="username()"
+          name="username"
+          autocomplete="username"
+          required
+          (ngModelChange)="username.set($event)"
+        />
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['login']['password'] }}</span>
+        <input
+          class="field__input"
+          type="password"
+          [ngModel]="password()"
+          name="password"
+          autocomplete="current-password"
+          required
+          (ngModelChange)="password.set($event)"
+        />
+      </label>
+      @if (error()) {
+        <p class="login__error">{{ dict()['admin']['login']['error'] }}</p>
+      }
+      <button type="submit" class="login__submit" [disabled]="busy()">
+        {{ dict()['admin']['login']['submit'] }}
+      </button>
+    </form>
+  </div>
+</main>

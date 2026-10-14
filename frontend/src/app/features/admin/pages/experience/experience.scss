@@ -1,0 +1,74 @@
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  &__dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  &__present {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-primary);
+  }
+
+  &__form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__submit {
+    height: 36px;
+    padding: 0 20px;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--text-primary);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__cancel {
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  &__add {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}

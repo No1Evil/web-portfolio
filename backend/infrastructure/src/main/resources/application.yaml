@@ -15,9 +15,14 @@ spring:
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
-    parameters:
-      admin-username: ${ADMIN_USERNAME:test}
-      admin-password-hash: ${ADMIN_PASSWORD_HASH:$2a$15$3dSezSi7qDOo7QLI9AscnegxdD.N.ResBGtWq0ve4nlZc.yaanxDy}
+
+# app.admin.* values below are local-dev defaults only.
+# They MUST be overridden via the ADMIN_USERNAME / ADMIN_PASSWORD environment variables
+# in any real deployment.
+app:
+  admin:
+    username: ${ADMIN_USERNAME:test}
+    password: ${ADMIN_PASSWORD:password}
 
 springdoc:
   swagger-ui:
