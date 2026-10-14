@@ -1,0 +1,28 @@
+<section class="timeline container">
+  <h1 class="timeline__heading">{{ dict().education.heading }}</h1>
+  @let state = education();
+  @if (state.status === 'resolved') {
+    <div class="timeline__list">
+      @for (entry of entries(); track entry.id) {
+        <article class="timeline__entry">
+          <div class="timeline__entry-meta">
+            <span class="timeline__entry-period">{{ entry.period }}</span>
+          </div>
+          <div class="timeline__entry-body">
+            <h2 class="timeline__entry-title">{{ entry.title }}</h2>
+            @if (entry.location) {
+              <p class="timeline__entry-subtitle">{{ entry.location }}</p>
+            }
+            @if (entry.description) {
+              <p class="timeline__entry-description">{{ entry.description }}</p>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  } @else if (state.status === 'loading') {
+    <p class="timeline__status">{{ dict().education.loading }}</p>
+  } @else {
+    <p class="timeline__status">{{ dict().education.empty }}</p>
+  }
+</section>

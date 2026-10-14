@@ -1,0 +1,24 @@
+<section class="contacts container">
+  <h1 class="contacts__heading">{{ dict().contact.heading }}</h1>
+  @let state = contacts();
+  @if (state.status === 'resolved') {
+    <div class="contacts__grid">
+      @for (contact of items(); track contact.id) {
+        <a class="contacts__card" [href]="contact.redirectUrl ?? '#'" target="_blank" rel="noopener noreferrer">
+          <div class="contacts__icon">
+            @if (hasIcon(contact)) {
+              <img [src]="contact.iconUrl" [alt]="contact.title" />
+            } @else {
+              <span>{{ contact.title?.[0] ?? '' }}</span>
+            }
+          </div>
+          <span class="contacts__title">{{ contact.title }}</span>
+        </a>
+      }
+    </div>
+  } @else if (state.status === 'loading') {
+    <p class="contacts__status">{{ dict().contact.loading }}</p>
+  } @else {
+    <p class="contacts__status">{{ dict().contact.empty }}</p>
+  }
+</section>

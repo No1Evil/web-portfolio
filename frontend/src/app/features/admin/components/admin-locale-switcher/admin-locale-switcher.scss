@@ -1,0 +1,33 @@
+.admin-locale {
+  display: inline-flex;
+  height: 36px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background-color: var(--bg);
+
+  &__option {
+    min-width: 40px;
+    padding: 0 12px;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color var(--transition-fast),
+      color var(--transition-fast);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &--active {
+      background-color: var(--surface);
+      color: var(--text-primary);
+    }
+  }
+}

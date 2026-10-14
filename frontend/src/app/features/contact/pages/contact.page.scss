@@ -1,0 +1,83 @@
+.contacts {
+  padding-top: 120px;
+
+  &__heading {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 64px;
+  }
+
+  &__status {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 40px;
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      border-color: var(--text-secondary);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+
+    img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+}
+
+@media (max-width: 640px) {
+  .contacts {
+    padding-top: 72px;
+
+    &__heading {
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    &__card {
+      flex: 1 1 100%;
+    }
+  }
+}

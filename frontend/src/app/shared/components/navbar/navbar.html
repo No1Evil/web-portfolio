@@ -1,0 +1,19 @@
+<header class="navbar">
+  <div class="navbar__inner container">
+    <a class="navbar__logo" routerLink="/">Fjodor Tšumakov</a>
+    <nav class="navbar__links">
+      @for (link of links(); track link.path) {
+        <a
+          class="navbar__link"
+          routerLink="{{ link.path }}"
+          routerLinkActive="navbar__link--active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+    <app-language-switcher />
+  </div>
+  <div class="navbar__hairline"></div>
+</header>

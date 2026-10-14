@@ -1,0 +1,17 @@
+.footer {
+  margin-top: 80px;
+
+  &__hairline {
+    height: 1px;
+    background-color: var(--border);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 32px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+}

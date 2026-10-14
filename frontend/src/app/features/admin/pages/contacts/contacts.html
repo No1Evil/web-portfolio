@@ -1,0 +1,44 @@
+<div class="contacts">
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">
+        {{ editingId() !== null ? dict()['admin']['edit'] : dict()['admin']['contacts']['addContact'] }}
+      </h2>
+    </div>
+    <form class="contacts__form" (ngSubmit)="submit()">
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['contacts']['type'] }}</span>
+        <select class="field__select" [ngModel]="type()" name="type" (ngModelChange)="type.set($event)">
+          @for (type of types; track type) {
+            <option [value]="type">{{ type }}</option>
+          }
+        </select>
+      </label>
+      <label class="field">
+        <span class="field__label">{{ dict()['admin']['contacts']['value'] }}</span>
+        <input
+          class="field__input"
+          type="text"
+          [ngModel]="value()"
+          name="value"
+          [placeholder]="dict()['admin']['contacts']['placeholderValue']"
+          (ngModelChange)="value.set($event)"
+        />
+      </label>
+      <div class="contacts__form-actions">
+        <button type="submit" class="contacts__submit">{{ dict()['admin']['save'] }}</button>
+        @if (editingId() !== null) {
+          <button type="button" class="contacts__cancel" (click)="cancel()">{{ dict()['admin']['cancel'] }}</button>
+        }
+      </div>
+    </form>
+  </section>
+
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">{{ dict()['admin']['nav']['contacts'] }}</h2>
+      <button type="button" class="contacts__add" (click)="startAdd()">+</button>
+    </div>
+    <app-admin-entry-list [rows]="rows()" (edit)="editFromRow($event)" (delete)="remove($event)" />
+  </section>
+</div>

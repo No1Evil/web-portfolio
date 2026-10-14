@@ -1,0 +1,14 @@
+<header class="topbar">
+  <h1 class="topbar__title">{{ dict()['admin']['nav'][titleKey()] }}</h1>
+  <div class="topbar__actions">
+    <a class="topbar__link" routerLink="/" target="_blank">{{ dict()['admin']['viewSite'] }} ↗</a>
+    <button type="button" class="topbar__publish">{{ dict()['admin']['publish'] }}</button>
+    <app-admin-locale-switcher />
+    <app-language-switcher />
+    @if (authenticated()) {
+      <button type="button" class="topbar__avatar" title="{{ user()?.username }}" (click)="signOut()">
+        {{ localeCode().charAt(0) }}
+      </button>
+    }
+  </div>
+</header>
