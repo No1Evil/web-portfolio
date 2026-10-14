@@ -1,10 +1,11 @@
 # Web portfolio CMS
 
-[![Backend CI](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
-[![Backend CD](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml/badge.svg?branch=main)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-deploy.yml)
+[![Backend CI](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-ci.yml/badge.svg?branch=dev)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-ci.yml)
+[![Frontend CI](https://github.com/No1Evil/web-portfolio/actions/workflows/frontend-ci.yml/badge.svg?branch=dev)](https://github.com/No1Evil/web-portfolio/actions/workflows/frontend-ci.yml)
+[![Release](https://github.com/No1Evil/web-portfolio/actions/workflows/release.yml/badge.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/release.yml)
 
-[![Coverage](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/jacoco.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
-[![Branches](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/branches.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/backend-tests.yml)
+[![Coverage](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/jacoco.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/coverage-badge.yml)
+[![Branches](https://raw.githubusercontent.com/No1Evil/web-portfolio/badges/.github/badges/branches.svg)](https://github.com/No1Evil/web-portfolio/actions/workflows/coverage-badge.yml)
 
 ![License](https://img.shields.io/github/license/No1Evil/web-portfolio?style=plastic&color=orange)
 ![Repo Size](https://img.shields.io/github/repo-size/No1Evil/web-portfolio?style=plastic)
