@@ -36,5 +36,20 @@ services:
       retries: 12
       start_period: 30s
 
+  frontend:
+    # Build requires frontend/openapi.yaml in the context (generated from the backend):
+    #   (cd backend && ./gradlew :infrastructure:generateOpenApiDocs) \
+    #     && cp backend/infrastructure/build/openapi.yaml frontend/openapi.yaml
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: web-portfolio-frontend
+    restart: always
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "4200:80"
+
 volumes:
   pg-data:
