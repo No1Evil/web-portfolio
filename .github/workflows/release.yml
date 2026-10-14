@@ -107,3 +107,24 @@ jobs:
           tags: |
             ghcr.io/${{ needs.prepare.outputs.owner }}/portfolio-frontend:${{ needs.prepare.outputs.version }}
             ghcr.io/${{ needs.prepare.outputs.owner }}/portfolio-frontend:latest
+
+  create-release:
+    name: GitHub release
+    needs:
+      - prepare
+      - backend-image
+      - frontend-image
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
