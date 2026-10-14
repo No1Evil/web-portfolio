@@ -25,13 +25,41 @@ jobs:
         id: meta
         run: |
           tag="${GITHUB_REF_NAME}"
-          if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-            echo "::error::Tag '$tag' is not a v<major>.<minor>.<patch> tag; refusing to publish."
+          if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-(alpha|beta|rc)(\.[0-9]+)?)?$ ]]; then
+            echo "::error::Tag '$tag' is not v<major>.<minor>.<patch>[-alpha|-beta|-rc]; refusing to publish."
             exit 1
           fi
           owner="$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
           echo "owner=${owner}" >> "$GITHUB_OUTPUT"
           echo "version=${tag#v}" >> "$GITHUB_OUTPUT"
+
+  determine-release-type:
+    name: Determine release type
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      tag_suffix: ${{ steps.rel_type.outputs.tag_suffix }}
+      is_prerelease: ${{ steps.rel_type.outputs.is_prerelease }}
+    steps:
+      - name: Determine release type
+        id: rel_type
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if [[ "$TAG" == *"-alpha"* ]]; then
+            echo "tag_suffix=latest-alpha" >> "$GITHUB_OUTPUT"
+            echo "is_prerelease=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$TAG" == *"-beta"* ]]; then
+            echo "tag_suffix=latest-beta" >> "$GITHUB_OUTPUT"
+            echo "is_prerelease=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$TAG" == *"-rc"* ]]; then
+            echo "tag_suffix=latest-rc" >> "$GITHUB_OUTPUT"
+            echo "is_prerelease=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "tag_suffix=latest" >> "$GITHUB_OUTPUT"
+            echo "is_prerelease=false" >> "$GITHUB_OUTPUT"
+          fi
 
   openapi:
     name: OpenAPI spec
@@ -40,7 +68,9 @@ jobs:
 
   backend-image:
     name: Backend image
-    needs: prepare
+    needs:
+      - prepare
+      - determine-release-type
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -68,14 +98,15 @@ jobs:
           ./gradlew :infrastructure:bootBuildImage \
             -PimageName="${IMAGE}:${{ needs.prepare.outputs.version }}" \
             -PpublishImage=true --console=plain
-          docker tag "${IMAGE}:${{ needs.prepare.outputs.version }}" "${IMAGE}:latest"
-          docker push "${IMAGE}:latest"
+          docker tag "${IMAGE}:${{ needs.prepare.outputs.version }}" "${IMAGE}:${{ needs.determine-release-type.outputs.tag_suffix }}"
+          docker push "${IMAGE}:${{ needs.determine-release-type.outputs.tag_suffix }}"
 
   frontend-image:
     name: Frontend image
     needs:
       - prepare
       - openapi
+      - determine-release-type
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -106,12 +137,13 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ needs.prepare.outputs.owner }}/portfolio-frontend:${{ needs.prepare.outputs.version }}
-            ghcr.io/${{ needs.prepare.outputs.owner }}/portfolio-frontend:latest
+            ghcr.io/${{ needs.prepare.outputs.owner }}/portfolio-frontend:${{ needs.determine-release-type.outputs.tag_suffix }}
 
   create-release:
     name: GitHub release
     needs:
       - prepare
+      - determine-release-type
       - backend-image
       - frontend-image
     runs-on: ubuntu-latest
@@ -127,4 +159,5 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
+          prerelease: ${{ needs.determine-release-type.outputs.is_prerelease }}
           generate_release_notes: true
