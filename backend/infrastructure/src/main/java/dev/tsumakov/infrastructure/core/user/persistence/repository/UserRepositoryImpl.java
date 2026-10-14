@@ -44,8 +44,11 @@ public class UserRepositoryImpl implements UserRepository {
 
   @Override
   public User create(User entity) {
+    // core.admin_user is a singleton row whose id is a fixed (non-generated) primary key,
+    // so the domain id must be preserved. The version is cleared so the ORM treats the
+    // instance as new (persist/insert) instead of a detached update (merge).
     var entityToSave = mapper.toEntity(entity);
-    entityToSave.setId(null);
+    entityToSave.setVersion(null);
 
     var savedEntity = repository.save(entityToSave);
     return mapper.toDomain(savedEntity);

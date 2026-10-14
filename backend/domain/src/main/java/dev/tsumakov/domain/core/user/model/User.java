@@ -23,6 +23,10 @@ public record User(
     return new User(id, username, passwordHash, createdAt, updatedAt, version);
   }
 
+  public User updateCredentials(String username, String passwordHash) {
+    return new User(id, username, passwordHash, createdAt, updatedAt, version);
+  }
+
   private void validateUserId(Integer id) {
     DomainObjects.requireNonNull(id, "User ID must not be null");
     if (!id.equals(1)) {

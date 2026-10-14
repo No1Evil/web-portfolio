@@ -113,8 +113,8 @@ class UserRepositoryImplTest {
   }
 
   @Test
-  void shouldCreateWithNullIdBeforeSave() {
-    var entity = entity(5);
+  void shouldCreatePreservingIdAndClearingVersionBeforeSave() {
+    var entity = entity(1);
     var user = domain(1);
     var created = domain(1);
     when(mapper.toEntity(user)).thenReturn(entity);
@@ -126,6 +126,7 @@ class UserRepositoryImplTest {
     assertThat(result).isSameAs(created);
     var captor = ArgumentCaptor.forClass(UserEntity.class);
     verify(repository).save(captor.capture());
-    assertThat(captor.getValue().getId()).isNull();
+    assertThat(captor.getValue().getId()).isEqualTo(1);
+    assertThat(captor.getValue().getVersion()).isNull();
   }
 }

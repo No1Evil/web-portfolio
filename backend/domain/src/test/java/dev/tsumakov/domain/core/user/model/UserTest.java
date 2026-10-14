@@ -85,4 +85,27 @@ public class UserTest {
     assertThatThrownBy(() -> validUser().updatePassword(null))
         .isInstanceOf(DomainValidationException.class);
   }
+
+  @Test
+  public void shouldUpdateCredentialsPreservingOtherFields() {
+    var user = validUser().updateCredentials("new-admin", "$2a$10$new-hash");
+    assertThat(user.id()).isEqualTo(1);
+    assertThat(user.username()).isEqualTo("new-admin");
+    assertThat(user.passwordHash()).isEqualTo("$2a$10$new-hash");
+    assertThat(user.createdAt()).isEqualTo(CREATED_AT);
+    assertThat(user.updatedAt()).isEqualTo(UPDATED_AT);
+    assertThat(user.version()).isEqualTo(5L);
+  }
+
+  @Test
+  public void shouldRejectBlankUsernameOnCredentialsUpdate() {
+    assertThatThrownBy(() -> validUser().updateCredentials(" ", "$2a$10$new-hash"))
+        .isInstanceOf(DomainValidationException.class);
+  }
+
+  @Test
+  public void shouldRejectBlankPasswordHashOnCredentialsUpdate() {
+    assertThatThrownBy(() -> validUser().updateCredentials("new-admin", null))
+        .isInstanceOf(DomainValidationException.class);
+  }
 }
